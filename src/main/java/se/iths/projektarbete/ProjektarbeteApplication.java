@@ -1,4 +1,4 @@
-package se.iths.projektarbete_komplex_java;
+package se.iths.projektarbete;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
