@@ -22,6 +22,7 @@ public class UserEntity {
     @NonNull
     private String username;
     @NonNull
+    @JsonIgnore
     private String password;
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
