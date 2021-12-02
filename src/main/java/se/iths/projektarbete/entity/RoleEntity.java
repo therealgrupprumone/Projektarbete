@@ -20,9 +20,9 @@ public class RoleEntity {
     @NonNull
     private String role;
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany
     private Set<UserEntity> userEntitySet;
-    
+
     @JsonIgnore
     public Set<UserEntity> getUserEntitySet() {
         return userEntitySet;
