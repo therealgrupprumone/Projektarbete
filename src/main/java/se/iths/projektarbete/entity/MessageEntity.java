@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(name = "message")
 public class MessageEntity {
 
     @Id
@@ -21,20 +22,24 @@ public class MessageEntity {
     private String message;
 
     @ManyToOne
-//    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id")
     @NonNull
     private UserEntity user;
 
     private LocalDate createdAt;
 
-    @JsonIgnore
     @ManyToOne
-//    @JoinColumn(name = "feed_id")
+    @JoinColumn(name = "feed_id")
     @NonNull
     private FeedEntity feedEntity;
 
     @PrePersist
     public void getCurrentDate() {
         setCreatedAt(LocalDate.now());
+    }
+
+    @JsonIgnore
+    public FeedEntity getFeedEntity() {
+        return feedEntity;
     }
 }

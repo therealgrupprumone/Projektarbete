@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -11,6 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(name = "role")
 public class RoleEntity {
 
     @Id
@@ -20,8 +22,8 @@ public class RoleEntity {
     @NonNull
     private String role;
 
-    @ManyToMany
-    private Set<UserEntity> userEntitySet;
+    @ManyToMany(mappedBy = "roles")
+    private Set<UserEntity> userEntitySet = new HashSet<>();
 
     @JsonIgnore
     public Set<UserEntity> getUserEntitySet() {
