@@ -23,24 +23,28 @@ public class PopulateDatabase {
         return args -> {
 
             FeedEntity feed = new FeedEntity(List.of());
-            feedRepo.save(feed);
+            feedRepo.save(feed);    /** VARFÖR BEHÖVER MAN SPARA DENNA **/
 
             RoleEntity admin = new RoleEntity("admin");
             RoleEntity user = new RoleEntity("user");
-            roleRepo.saveAll(List.of(admin, user));
+//            roleRepo.saveAll(List.of(admin, user));
+            /** VARFÖR BEHÖVER MAN INTE SPARA DENNA **/
 
             UserEntity jannis = new UserEntity("jannis", "tyskland");
             UserEntity joakim = new UserEntity("joakim", "sverige");
             UserEntity albert = new UserEntity("albert", "danmark");
             UserEntity casper = new UserEntity("casper", "ungern");
-            userRepo.saveAll(List.of(jannis, joakim, albert, casper));
+            userRepo.saveAll(List.of(jannis, joakim, albert, casper));  /** VARFÖR BEHÖVER MAN SPARA DENNA **/
 
-            MessageEntity message = new MessageEntity("Hello World", jannis, feed);
-            messageRepo.save(message);
+            MessageEntity message1 = new MessageEntity("Hello from jannis", jannis, feed);
+            MessageEntity message2 = new MessageEntity("Hello from joakim", joakim, feed);
+//            messageRepo.saveAll(List.of(message1, message2));
+            /** VARFÖR BEHÖVER MAN INTE SPARA DENNA **/
 
-            jannis.addMessage(message);
+            jannis.addMessage(message1);
             jannis.addRole(admin);
             joakim.addRole(user);
+            joakim.addMessage(message2);
             userRepo.saveAll(List.of(jannis, joakim, albert, casper));
         };
     }
