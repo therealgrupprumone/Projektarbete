@@ -1,5 +1,6 @@
 package se.iths.projektarbete.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,14 +21,15 @@ public class MessageEntity {
     private String message;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+//    @JoinColumn(name = "user_id")
     @NonNull
     private UserEntity user;
 
     private LocalDate createdAt;
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "feed_id")
+//    @JoinColumn(name = "feed_id")
     @NonNull
     private FeedEntity feedEntity;
 
