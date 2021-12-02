@@ -11,6 +11,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @RequiredArgsConstructor
+@Table(name = "user")
 public class UserEntity {
 
     @Id
@@ -21,7 +22,16 @@ public class UserEntity {
     private String username;
     @NonNull
     private String password;
-    @ManyToMany(mappedBy = "userEntitySet", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    },
+            fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "role_user",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
     private Set<RoleEntity> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -32,4 +42,8 @@ public class UserEntity {
         roleEntity.getUserEntitySet().add(this);
     }
 
+    public void addMessage(MessageEntity messageEntity) {
+        messageEntitySet.add(messageEntity);
+        messageEntity.setUser(this);
+    }
 }

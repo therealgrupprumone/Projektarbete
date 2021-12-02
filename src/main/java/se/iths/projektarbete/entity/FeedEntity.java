@@ -10,6 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(name = "feed")
 public class FeedEntity {
 
     @Id
