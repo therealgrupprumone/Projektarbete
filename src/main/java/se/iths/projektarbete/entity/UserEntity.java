@@ -1,5 +1,6 @@
 package se.iths.projektarbete.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -37,6 +38,7 @@ public class UserEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<MessageEntity> messageEntitySet = new HashSet<>();
 
+
     public void addRole(RoleEntity roleEntity) {
         roles.add(roleEntity);
         roleEntity.getUserEntitySet().add(this);
@@ -45,5 +47,10 @@ public class UserEntity {
     public void addMessage(MessageEntity messageEntity) {
         messageEntitySet.add(messageEntity);
         messageEntity.setUser(this);
+    }
+
+    @JsonIgnore
+    public Set<MessageEntity> getMessageEntitySet() {
+        return messageEntitySet;
     }
 }
