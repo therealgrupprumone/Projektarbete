@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @RequiredArgsConstructor
@@ -26,7 +26,7 @@ public class MessageEntity {
     @NonNull
     private UserEntity user;
 
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @ManyToOne
     @JoinColumn(name = "feed_id")
@@ -35,7 +35,7 @@ public class MessageEntity {
 
     @PrePersist
     public void getCurrentDate() {
-        setCreatedAt(LocalDate.now());
+        setCreatedAt(LocalDateTime.now());
     }
 
     @JsonIgnore
