@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import se.iths.projektarbete.entity.FeedEntity;
 import se.iths.projektarbete.repo.FeedRepo;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class FeedService {
@@ -13,5 +15,9 @@ public class FeedService {
 
     public Iterable<FeedEntity> findAll() {
         return feedRepo.findAll();
+    }
+
+    public Optional<FeedEntity> findByFeedId(Long id) {
+        return feedRepo.findById(id);
     }
 }
