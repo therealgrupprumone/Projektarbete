@@ -20,5 +20,4 @@ public class Message {
     private LocalDateTime createdAt;
 
     private Long feedId;
-
 }
