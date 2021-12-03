@@ -1,5 +1,7 @@
 package se.iths.projektarbete;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,12 +17,19 @@ import se.iths.projektarbete.repo.UserRepo;
 import java.util.List;
 
 @Configuration
+@Slf4j
 public class PopulateDatabase {
+
+    @Value("${current.profile:default profile}")
+    private String profile;
 
     // CommandLineRunner loadDatabase(MovieRepo movieRepo)
     @Bean
     CommandLineRunner loadDatabase(UserRepo userRepo, RoleRepo roleRepo, MessageRepo messageRepo, FeedRepo feedRepo) {
         return args -> {
+
+
+            log.info("Running with profile: " + profile);
 
             FeedEntity feed = new FeedEntity(List.of());
             feedRepo.save(feed);    /** VARFÖR BEHÖVER MAN SPARA DENNA **/
