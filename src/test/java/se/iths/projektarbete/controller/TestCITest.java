@@ -10,6 +10,6 @@ class TestCITest {
 
     @Test
     void testThatCiWorksWithABasicAddMethod() {
-        assertEquals(40, testCI.add(10, 10));
+        assertEquals(20, testCI.add(10, 10));
     }
 }
