@@ -18,4 +18,5 @@ public interface UserMapper {
 
     @Mapping(target = "messages", ignore = true)
     UserEntity fromDto(User user);
+
 }
