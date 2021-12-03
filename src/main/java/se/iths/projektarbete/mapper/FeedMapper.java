@@ -16,5 +16,4 @@ public interface FeedMapper {
     Feed toDto(FeedEntity entity);
 
     FeedEntity fromDto(Feed feed);
-
 }
