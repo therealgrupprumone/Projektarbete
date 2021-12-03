@@ -27,28 +27,23 @@ public class PopulateDatabase {
     @Bean
     CommandLineRunner loadDatabase(UserRepo userRepo, RoleRepo roleRepo, MessageRepo messageRepo, FeedRepo feedRepo) {
         return args -> {
-
-
+            
             log.info("Running with profile: " + profile);
 
             FeedEntity feed = new FeedEntity(List.of());
-            feedRepo.save(feed);    /** VARFÖR BEHÖVER MAN SPARA DENNA **/
+            feedRepo.save(feed);
 
             RoleEntity admin = new RoleEntity("admin");
             RoleEntity user = new RoleEntity("user");
-//            roleRepo.saveAll(List.of(admin, user));
-            /** VARFÖR BEHÖVER MAN INTE SPARA DENNA **/
 
             UserEntity jannis = new UserEntity("jannis", "tyskland");
             UserEntity joakim = new UserEntity("joakim", "sverige");
             UserEntity albert = new UserEntity("albert", "danmark");
             UserEntity casper = new UserEntity("casper", "ungern");
-            userRepo.saveAll(List.of(jannis, joakim, albert, casper));  /** VARFÖR BEHÖVER MAN SPARA DENNA **/
+            userRepo.saveAll(List.of(jannis, joakim, albert, casper));
 
             MessageEntity message1 = new MessageEntity("Hello from jannis", jannis, feed);
             MessageEntity message2 = new MessageEntity("Hello from joakim", joakim, feed);
-//            messageRepo.saveAll(List.of(message1, message2));
-            /** VARFÖR BEHÖVER MAN INTE SPARA DENNA **/
 
             jannis.addMessage(message1);
             jannis.addRole(admin);
