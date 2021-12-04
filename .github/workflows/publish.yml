@@ -1,12 +1,10 @@
 # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: Build and run tests with Java 17
+name: Publish mvn package on github
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
     branches: [ master ]
 
 jobs:
@@ -22,11 +20,7 @@ jobs:
           java-version: '17'
           distribution: 'zulu'
           cache: maven
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
-      - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1
-        if: always()
-        with:
-          files: target/surefire-reports/*.xml
-          check_name: "Test Results"
+      - name: Publish package
+        run: mvn --batch-mode deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
