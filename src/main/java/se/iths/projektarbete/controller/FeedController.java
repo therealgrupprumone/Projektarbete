@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import se.iths.projektarbete.dto.Feed;
 import se.iths.projektarbete.entity.FeedEntity;
 import se.iths.projektarbete.service.FeedService;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -20,13 +22,12 @@ public class FeedController {
     private final FeedService feedService;
 
     @GetMapping
-    public ResponseEntity<Iterable<FeedEntity>> getAllFeeds() {
+    public ResponseEntity<List<Feed>> getAllFeeds() {
         return ResponseEntity.ok(feedService.findAll());
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Optional<FeedEntity>> getFeedById(@PathVariable Long id) {
-        Optional<FeedEntity> foundFeed = feedService.findByFeedId(id);
-        return new ResponseEntity<>(foundFeed, HttpStatus.OK);
+    public ResponseEntity<Feed> getFeedById(@PathVariable Long id) {
+        return ResponseEntity.ok(feedService.findByFeedId(id));
     }
 }
