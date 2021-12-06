@@ -1,4 +1,4 @@
-package se.iths.projektarbete.integrationtest;
+package se.iths.projektarbete.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
