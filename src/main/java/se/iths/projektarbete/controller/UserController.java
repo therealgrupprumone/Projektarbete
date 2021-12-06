@@ -37,5 +37,4 @@ public class UserController {
         userService.createUser(user);
         return ResponseEntity.ok(user);
     }
-
 }
