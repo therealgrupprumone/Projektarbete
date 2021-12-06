@@ -16,8 +16,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/users/signup").permitAll()
-                .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/", "/users/signup").permitAll() // TODO Se över denna endpoint
+                .antMatchers("/admin").hasRole("ADMIN") // TODO Se till att 'Role' är admin i testdata
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()
