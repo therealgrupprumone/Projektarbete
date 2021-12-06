@@ -5,11 +5,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.iths.projektarbete.dto.Role;
 import se.iths.projektarbete.dto.User;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import se.iths.projektarbete.entity.RoleEntity;
 import se.iths.projektarbete.entity.UserEntity;
 import se.iths.projektarbete.service.RoleService;
 import se.iths.projektarbete.service.UserService;
-
 import java.util.List;
 
 @RestController
@@ -38,5 +41,11 @@ public class UserController {
     public ResponseEntity<User> createUser(@RequestBody User user) {
         userService.createUser(user);
         return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Optional<UserEntity>> getUserById(@PathVariable Long id){
+        return ResponseEntity.ok(userService.findById(id));
+
     }
 }

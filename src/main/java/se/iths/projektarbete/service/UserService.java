@@ -8,7 +8,6 @@ import se.iths.projektarbete.dto.User;
 import se.iths.projektarbete.entity.UserEntity;
 import se.iths.projektarbete.mapper.UserMapper;
 import se.iths.projektarbete.repo.UserRepo;
-
 import java.util.ArrayList;
 import java.util.List;
 
