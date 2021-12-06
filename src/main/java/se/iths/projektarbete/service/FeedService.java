@@ -26,7 +26,9 @@ public class FeedService {
         return allFeeds;
     }
 
-    public Optional<FeedEntity> findByFeedId(Long id) {
-        return feedRepo.findById(id);
+    public Feed findByFeedId(Long id) {
+        return feedRepo.findById(id)
+                .map(mapper::toDto)
+                .orElseThrow();
     }
 }
