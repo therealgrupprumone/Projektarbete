@@ -22,7 +22,7 @@ public class RoleEntity {
     @NonNull
     private String role;
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
     private Set<UserEntity> userEntitySet = new HashSet<>();
 
     @JsonIgnore

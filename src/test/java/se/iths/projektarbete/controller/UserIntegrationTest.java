@@ -38,6 +38,14 @@ class UserIntegrationTest {
 
     private MockMvc mockMvc;
 
+    public static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @BeforeAll
     public void setup() {
 
@@ -45,13 +53,12 @@ class UserIntegrationTest {
 
     }
 
-
     @Test
     void callingURLForOneUserWithValidIdForExistingUserAndReturnRequestedUserAsJson() throws Exception {
 
         //given
         UserEntity userEntity = new UserEntity();
-        RoleEntity roleEntity = new RoleEntity("admin");
+        RoleEntity roleEntity = new RoleEntity("ROLE_ADMIN");
         roleEntity.setId(1L);
         userEntity.setId(2L);
         userEntity.setUsername("Jannis");
@@ -75,7 +82,7 @@ class UserIntegrationTest {
     void callingURLForAllUsersAndReturnRequestedUserAsJson() throws Exception {
 
         //given
-        RoleEntity roleEntity = new RoleEntity("admin");
+        RoleEntity roleEntity = new RoleEntity("ROLE_ADMIN");
         roleEntity.setId(1L);
 
 
@@ -102,18 +109,6 @@ class UserIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json(asJsonString(users)));
     }
-
-
-
-    public static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
 
 
 }
