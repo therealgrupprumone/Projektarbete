@@ -1,4 +1,4 @@
-package se.iths.projektarbete.controller;
+package se.iths.projektarbete.integrationtest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class UserControllerTest {
+class UserIntegrationTest {
 
     @MockBean
     UserService userService;
