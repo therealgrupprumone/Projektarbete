@@ -6,7 +6,6 @@ import se.iths.projektarbete.dto.Feed;
 import se.iths.projektarbete.entity.FeedEntity;
 import se.iths.projektarbete.mapper.FeedMapper;
 import se.iths.projektarbete.repo.FeedRepo;
-
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;

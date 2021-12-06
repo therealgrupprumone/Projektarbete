@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import se.iths.projektarbete.dto.Feed;
 import se.iths.projektarbete.service.FeedService;
-
 import java.util.List;
 
 @RestController
