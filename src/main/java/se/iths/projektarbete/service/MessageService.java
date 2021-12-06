@@ -10,6 +10,8 @@ import se.iths.projektarbete.repo.MessageRepo;
 import se.iths.projektarbete.repo.UserRepo;
 
 import javax.transaction.Transactional;
+import se.iths.projektarbete.mapper.MessageMapper;
+import se.iths.projektarbete.repo.MessageRepo;
 import java.util.ArrayList;
 import java.util.List;
 

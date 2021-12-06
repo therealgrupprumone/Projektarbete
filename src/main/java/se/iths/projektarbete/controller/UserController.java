@@ -7,7 +7,6 @@ import se.iths.projektarbete.dto.Role;
 import se.iths.projektarbete.dto.User;
 import se.iths.projektarbete.service.RoleService;
 import se.iths.projektarbete.service.UserService;
-
 import java.util.List;
 
 @RestController
@@ -24,7 +23,7 @@ public class UserController {
     }
 
     @GetMapping("")
-    public ResponseEntity<Iterable<User>> getAllUsers() {
+    public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 

@@ -1,7 +1,6 @@
 package se.iths.projektarbete.dto;
 
 import lombok.*;
-
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -20,4 +19,5 @@ public class Message {
     private LocalDateTime createdAt;
 
     private Long feedId;
+
 }

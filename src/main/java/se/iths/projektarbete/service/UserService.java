@@ -1,12 +1,13 @@
 package se.iths.projektarbete.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import se.iths.projektarbete.dto.User;
 import se.iths.projektarbete.entity.UserEntity;
 import se.iths.projektarbete.mapper.UserMapper;
 import se.iths.projektarbete.repo.UserRepo;
-
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
