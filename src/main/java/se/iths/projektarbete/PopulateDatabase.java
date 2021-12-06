@@ -52,7 +52,7 @@ public class PopulateDatabase {
             UserEntity joakim = new UserEntity("joakim", "sverige");
             UserEntity albert = new UserEntity("albert", "danmark");
             UserEntity casper = new UserEntity("casper", "ungern");
-            
+
             userRepo.saveAll(List.of(jannis, joakim, albert, casper));
 
             MessageEntity message1 = new MessageEntity("Hello from jannis", jannis, feedEntity);

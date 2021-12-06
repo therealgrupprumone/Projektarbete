@@ -1,6 +1,5 @@
 package se.iths.projektarbete.service;
 
-import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import se.iths.projektarbete.dto.User;
@@ -16,13 +15,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
 public class UserService {
 
     private final UserRepo userRepo;
     private final UserMapper mapper;
     private final RoleRepo roleRepo;
-    private final BCryptPasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    public UserService(UserRepo userRepo, RoleRepo roleRepo) {
+        this.userRepo = userRepo;
+        this.roleRepo = roleRepo;
+    }
 
     public List<User> getAllUsers() {
         List<User> allUsers = new ArrayList<>();
