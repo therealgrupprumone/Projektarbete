@@ -23,9 +23,9 @@ public class UserEntity {
     private String username;
     @NonNull
     private String password;
+
     @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
+            CascadeType.ALL
     },
             fetch = FetchType.EAGER)
     @JoinTable(
@@ -37,7 +37,6 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<MessageEntity> messages = new HashSet<>();
-
 
     public void addRole(RoleEntity roleEntity) {
         roles.add(roleEntity);
