@@ -6,9 +6,9 @@ import se.iths.projektarbete.dto.Feed;
 import se.iths.projektarbete.entity.FeedEntity;
 import se.iths.projektarbete.mapper.FeedMapper;
 import se.iths.projektarbete.repo.FeedRepo;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -24,5 +24,9 @@ public class FeedService {
             allFeeds.add(mapper.toDto(feed));
         });
         return allFeeds;
+    }
+
+    public Optional<FeedEntity> findByFeedId(Long id) {
+        return feedRepo.findById(id);
     }
 }
