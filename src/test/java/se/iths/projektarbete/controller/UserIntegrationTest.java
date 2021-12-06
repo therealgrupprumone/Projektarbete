@@ -18,6 +18,7 @@ import se.iths.projektarbete.entity.RoleEntity;
 import se.iths.projektarbete.entity.UserEntity;
 import se.iths.projektarbete.service.UserService;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.BDDMockito.given;
@@ -46,13 +47,13 @@ class UserIntegrationTest {
 
 
     @Test
-    void callingURLForOneUserWithValidIdForExistingDirectorAndReturnRequestedUserAsJson() throws Exception {
+    void callingURLForOneUserWithValidIdForExistingUserAndReturnRequestedUserAsJson() throws Exception {
 
         //given
         UserEntity userEntity = new UserEntity();
         RoleEntity roleEntity = new RoleEntity("admin");
         roleEntity.setId(1L);
-        userEntity.setId(1L);
+        userEntity.setId(2L);
         userEntity.setUsername("Jannis");
         userEntity.addRole(roleEntity);
 
@@ -64,11 +65,45 @@ class UserIntegrationTest {
 
         //expect
         mockMvc.perform(
-                        MockMvcRequestBuilders.get("/users/1")
+                        MockMvcRequestBuilders.get("/users/2")
                                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().json(asJsonString(userEntity)));
     }
+
+    @Test
+    void callingURLForAllUsersAndReturnRequestedUserAsJson() throws Exception {
+
+        //given
+        RoleEntity roleEntity = new RoleEntity("admin");
+        roleEntity.setId(1L);
+
+
+        UserEntity userEntity1 = new UserEntity();
+        userEntity1.setId(1L);
+        userEntity1.setUsername("Jannis");
+        userEntity1.addRole(roleEntity);
+
+        UserEntity userEntity2 = new UserEntity();
+        userEntity2.setId(2L);
+        userEntity2.setUsername("albert");
+        userEntity2.addRole(roleEntity);
+
+        Iterable<UserEntity> users = List.of(userEntity1, userEntity2);
+
+        System.out.println(asJsonString(users));
+
+        given(userService.findAll()).willReturn(users);
+
+        //expect
+        mockMvc.perform(
+                        MockMvcRequestBuilders.get("/users")
+                                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json(asJsonString(users)));
+    }
+
+
 
     public static String asJsonString(final Object obj) {
         try {
@@ -80,17 +115,5 @@ class UserIntegrationTest {
 
 
 
-//    @Test
-//    void callingURLForOneUserWithInvalidIdAndReturn404Exception() throws Exception {
-//
-//        when(userService.findById(1L))
-//                .thenThrow(new ResponseStatusException(HttpStatus.NOT_FOUND));
-//
-//        mockMvc.perform(
-//                        MockMvcRequestBuilders.get("/users/1")
-//                                .accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isNotFound());
-//    }
-//
 
 }
