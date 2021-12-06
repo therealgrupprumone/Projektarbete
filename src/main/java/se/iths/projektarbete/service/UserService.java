@@ -1,16 +1,19 @@
 package se.iths.projektarbete.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 import se.iths.projektarbete.dto.User;
+import se.iths.projektarbete.entity.RoleEntity;
 import se.iths.projektarbete.entity.UserEntity;
 import se.iths.projektarbete.mapper.UserMapper;
+import se.iths.projektarbete.repo.RoleRepo;
 import se.iths.projektarbete.repo.UserRepo;
+
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -18,6 +21,8 @@ public class UserService {
 
     private final UserRepo userRepo;
     private final UserMapper mapper;
+    private final RoleRepo roleRepo;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     public List<User> getAllUsers() {
         List<User> allUsers = new ArrayList<>();
@@ -29,6 +34,19 @@ public class UserService {
         return allUsers;
     }
 
+    public UserEntity createUser(UserEntity userEntity) {
+        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+        RoleEntity roleToAdd = roleRepo.findByRole("ROLE_USER");
+        userEntity.addRole(roleToAdd);
+        return userRepo.save(userEntity);
+    }
+
+    public void deleteUser(Long id) {
+        UserEntity foundUser = userRepo.findById(id)
+                .orElseThrow(EntityNotFoundException::new);
+        userRepo.deleteById(foundUser.getId());
+    }
+
     public User getUser(Long id) {
         return userRepo.findById(id)
                 .map(mapper::toDto)
@@ -36,8 +54,15 @@ public class UserService {
                         new EntityNotFoundException("User with id: " + id + " does not exist"));
     }
 
+
     public User createUser(User user) {
         userRepo.save(mapper.fromDto(user));
         return user;
     }
+
+    public Optional<UserEntity> findById(Long id) {
+        return userRepo.findById(id);
+
+    }
+
 }

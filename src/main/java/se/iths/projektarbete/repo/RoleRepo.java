@@ -6,4 +6,5 @@ import se.iths.projektarbete.entity.RoleEntity;
 
 @Repository
 public interface RoleRepo extends CrudRepository<RoleEntity, Long> {
+    RoleEntity findByRole(String role);
 }
