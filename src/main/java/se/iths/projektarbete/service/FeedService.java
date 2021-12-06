@@ -19,11 +19,8 @@ public class FeedService {
     private FeedRepo feedRepo;
 
     public List<Feed> findAll() {
-
-
-        List<se.iths.projektarbete.dto.Feed> allFeeds = new ArrayList<>();
+        List<Feed> allFeeds = new ArrayList<>();
         Iterable<FeedEntity> foundFeeds = feedRepo.findAll();
-
         foundFeeds.forEach(feed -> {
             allFeeds.add(mapper.toDto(feed));
         });
@@ -40,6 +37,4 @@ public class FeedService {
     public Feed createFeed(Feed feed) {
         return mapper.toDto(feedRepo.save(mapper.fromDto(feed)));
     }
-
-
 }
