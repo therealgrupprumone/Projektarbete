@@ -29,4 +29,5 @@ public class RoleEntity {
     public Set<UserEntity> getUsers() {
         return users;
     }
+
 }
