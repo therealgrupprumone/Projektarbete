@@ -6,6 +6,7 @@ import se.iths.projektarbete.dto.Message;
 import se.iths.projektarbete.entity.MessageEntity;
 import se.iths.projektarbete.mapper.MessageMapper;
 import se.iths.projektarbete.repo.MessageRepo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +14,8 @@ import java.util.List;
 @AllArgsConstructor
 public class MessageService {
 
-    private MessageRepo messageRepo;
     private final MessageMapper mapper;
+    private MessageRepo messageRepo;
 
     public List<Message> findAll() {
         List<Message> allMessages = new ArrayList<>();
@@ -24,4 +25,9 @@ public class MessageService {
         });
         return allMessages;
     }
+
+    // postMessage(MessageDto message, feed) {
+    // mappa MessageDto till MessegeEntity
+    //
+    //}
 }

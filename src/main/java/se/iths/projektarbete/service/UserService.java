@@ -1,6 +1,5 @@
 package se.iths.projektarbete.service;
 
-import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,38 +10,39 @@ import se.iths.projektarbete.entity.UserEntity;
 import se.iths.projektarbete.mapper.UserMapper;
 import se.iths.projektarbete.repo.RoleRepo;
 import se.iths.projektarbete.repo.UserRepo;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
-import java.util.Optional;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
-@AllArgsConstructor
 public class UserService {
 
     private final UserRepo userRepo;
     private final UserMapper mapper;
-
-    public List<User> getAllUsers() {
-        List<User> allUsers = new ArrayList<>();
-        Iterable<UserEntity> foundUsers = userRepo.findAll();
-        foundUsers.forEach(user -> {
-            allUsers.add(mapper.toDto(user));
-        });
-        return allUsers;
-    }
     private final RoleRepo roleRepo;
+
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public UserService(UserRepo userRepo, RoleRepo roleRepo) {
+    public UserService(UserRepo userRepo, UserMapper mapper, RoleRepo roleRepo) {
         this.userRepo = userRepo;
+        this.mapper = mapper;
         this.roleRepo = roleRepo;
     }
 
+    public List<User> getAllUsers() {
+        Iterable<UserEntity> foundUsers = userRepo.findAll();
+
+        return StreamSupport.stream(foundUsers.spliterator(), false)
+                .map(mapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    // TODO Justera denna till att använda DTO?
     @Transactional
-    public UserEntity createUser(UserEntity userEntity, String role) {
+    public UserEntity createUserEntity(UserEntity userEntity, String role) {
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
         RoleEntity roleToAdd = roleRepo.findByRole(role);
         userEntity.addRole(roleToAdd);
@@ -62,8 +62,9 @@ public class UserService {
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "No user found for id " + id));
     }
 
-    public User createUser(User user) {
+    public User createDtoUser(User user) {
         userRepo.save(mapper.fromDto(user));
         return user;
 
+    }
 }

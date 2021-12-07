@@ -10,6 +10,7 @@ import se.iths.projektarbete.entity.MessageEntity;
 import se.iths.projektarbete.entity.RoleEntity;
 import se.iths.projektarbete.entity.UserEntity;
 import se.iths.projektarbete.repo.FeedRepo;
+import se.iths.projektarbete.repo.MessageRepo;
 import se.iths.projektarbete.repo.RoleRepo;
 import se.iths.projektarbete.service.UserService;
 
@@ -22,7 +23,7 @@ public class PopulateDatabase {
 
     // CommandLineRunner loadDatabase(MovieRepo movieRepo)
     @Bean
-    CommandLineRunner loadDatabase(RoleRepo roleRepo, FeedRepo feedRepo, UserService userService) {
+    CommandLineRunner loadDatabase(RoleRepo roleRepo, FeedRepo feedRepo, UserService userService, MessageRepo messageRepo) {
         return args -> {
 
             var feed = new FeedEntity();
@@ -30,22 +31,23 @@ public class PopulateDatabase {
 
             var roleUser = new RoleEntity("ROLE_USER");
             var roleAdmin = new RoleEntity("ROLE_ADMIN");
-
             roleRepo.save(roleUser);
             roleRepo.save(roleAdmin);
 
             var userJannis = new UserEntity("Jannis", "tyskland");
             var userAlbert = new UserEntity("Albert", "sverige");
 
+            userService.createUserEntity(userJannis, "ROLE_USER");
+            userService.createUserEntity(userAlbert, "ROLE_ADMIN");
+
             var msgJannis = new MessageEntity("First Hello!", userJannis, feed);
             userJannis.addMessage(msgJannis);
+            messageRepo.save(msgJannis);
 
             var msgAlbert = new MessageEntity("Hello again!", userAlbert, feed);
             userAlbert.addMessage(msgAlbert);
+            messageRepo.save(msgAlbert);
 
-            // Krypterar lösenord, assignar roll och sparar entitet via userRepo i databasen
-            userService.createUser(userAlbert, "ROLE_ADMIN");
-            userService.createUser(userJannis, "ROLE_USER");
 
             log.info("Running with profile: " + profile);
         };
