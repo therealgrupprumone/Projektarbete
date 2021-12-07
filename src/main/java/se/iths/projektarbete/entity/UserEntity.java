@@ -26,15 +26,7 @@ public class UserEntity {
     @JsonIgnore
     private String password;
 
-    @ManyToMany(cascade = {
-            CascadeType.ALL
-    },
-            fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "role_user",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<RoleEntity> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -42,7 +34,7 @@ public class UserEntity {
 
     public void addRole(RoleEntity roleEntity) {
         roles.add(roleEntity);
-        roleEntity.getUserEntitySet().add(this);
+        roleEntity.getUsers().add(this);
     }
 
     public void addMessage(MessageEntity messageEntity) {
