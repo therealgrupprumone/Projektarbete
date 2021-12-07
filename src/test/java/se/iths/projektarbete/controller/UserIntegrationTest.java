@@ -1,4 +1,4 @@
-package se.iths.projektarbete.integrationtest;
+package se.iths.projektarbete.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
@@ -14,12 +14,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import se.iths.projektarbete.dto.User;
 import se.iths.projektarbete.entity.RoleEntity;
-import se.iths.projektarbete.entity.UserEntity;
 import se.iths.projektarbete.service.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -38,14 +39,6 @@ class UserIntegrationTest {
 
     private MockMvc mockMvc;
 
-    public static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     @BeforeAll
     public void setup() {
 
@@ -53,54 +46,52 @@ class UserIntegrationTest {
 
     }
 
+
     @Test
     void callingURLForOneUserWithValidIdForExistingUserAndReturnRequestedUserAsJson() throws Exception {
 
         //given
-        UserEntity userEntity = new UserEntity();
-        RoleEntity roleEntity = new RoleEntity("ROLE_ADMIN");
+        RoleEntity roleEntity = new RoleEntity("admin");
         roleEntity.setId(1L);
-        userEntity.setId(2L);
-        userEntity.setUsername("Jannis");
-        userEntity.addRole(roleEntity);
 
-        System.out.println(asJsonString(roleEntity));
+        User user = new User();
+        user.setUsername("Jannis");
+        user.setId(2L);
+        user.setRoles(Set.of(roleEntity));
 
-        Optional<UserEntity> optionalUserEntity = Optional.of(userEntity);
-
-        given(userService.findById(optionalUserEntity.get().getId())).willReturn(optionalUserEntity);
+        given(userService.getUser(user.getId())).willReturn(user);
 
         //expect
         mockMvc.perform(
                         MockMvcRequestBuilders.get("/users/2")
                                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json(asJsonString(userEntity)));
+                .andExpect(content().json(asJsonString(user)));
     }
 
     @Test
     void callingURLForAllUsersAndReturnRequestedUserAsJson() throws Exception {
 
         //given
-        RoleEntity roleEntity = new RoleEntity("ROLE_ADMIN");
+        RoleEntity roleEntity = new RoleEntity("admin");
         roleEntity.setId(1L);
 
+        User user = new User();
+        user.setUsername("Jannis");
+        user.setId(2L);
+        user.setRoles(Set.of(roleEntity));
 
-        UserEntity userEntity1 = new UserEntity();
-        userEntity1.setId(1L);
-        userEntity1.setUsername("Jannis");
-        userEntity1.addRole(roleEntity);
+        User user1 = new User();
+        user1.setUsername("Albert");
+        user1.setId(1L);
+        user1.setRoles(Set.of(roleEntity));
 
-        UserEntity userEntity2 = new UserEntity();
-        userEntity2.setId(2L);
-        userEntity2.setUsername("albert");
-        userEntity2.addRole(roleEntity);
+        List<User> users = new ArrayList<>();
+        users.add(user);
+        users.add(user1);
 
-        Iterable<UserEntity> users = List.of(userEntity1, userEntity2);
 
-        System.out.println(asJsonString(users));
-
-        given(userService.findAll()).willReturn(users);
+        given(userService.getAllUsers()).willReturn(users);
 
         //expect
         mockMvc.perform(
@@ -109,6 +100,18 @@ class UserIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json(asJsonString(users)));
     }
+
+
+
+    public static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
 
 }
