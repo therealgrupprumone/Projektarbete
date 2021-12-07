@@ -61,7 +61,6 @@ public class UserService {
                         new EntityNotFoundException("User with id: " + id + " does not exist"));
     }
 
-
     public User createDtoUser(User user) {
         userRepo.save(mapper.fromDto(user));
         return user;
