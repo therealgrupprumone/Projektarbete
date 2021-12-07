@@ -8,6 +8,7 @@ import se.iths.projektarbete.repo.RoleRepo;
 import se.iths.projektarbete.repo.UserRepo;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -22,9 +23,10 @@ public class UserService {
         this.roleRepo = roleRepo;
     }
 
-    public UserEntity createUser(UserEntity userEntity) {
+    @Transactional
+    public UserEntity createUser(UserEntity userEntity, String role) {
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-        RoleEntity roleToAdd = roleRepo.findByRole("ROLE_USER");
+        RoleEntity roleToAdd = roleRepo.findByRole(role);
         userEntity.addRole(roleToAdd);
         return userRepo.save(userEntity);
     }
