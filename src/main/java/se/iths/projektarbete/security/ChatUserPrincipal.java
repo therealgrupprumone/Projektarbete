@@ -37,7 +37,7 @@ public class ChatUserPrincipal implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.userEntity.getPassword();
+        return this.userEntity.getUsername();
     }
 
     @Override

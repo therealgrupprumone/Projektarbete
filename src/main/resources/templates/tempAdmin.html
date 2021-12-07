@@ -5,7 +5,7 @@
     <title>Admin - Welcome</title>
 </head>
 <body>
-<h1 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]!</h1>
+<h1>Admin Console</h1>
 <p>This is the admin console, restricted to administrators only.</p>
 <form method="post" th:action="@{/logout}">
     <input type="submit" value="Sign Out"/>

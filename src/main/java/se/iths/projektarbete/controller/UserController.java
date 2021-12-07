@@ -7,6 +7,7 @@ import se.iths.projektarbete.dto.Role;
 import se.iths.projektarbete.dto.User;
 import se.iths.projektarbete.service.RoleService;
 import se.iths.projektarbete.service.UserService;
+
 import java.util.List;
 
 @RestController
@@ -34,7 +35,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
-        userService.createUser(user);
+        userService.createDtoUser(user);
         return ResponseEntity.ok(user);
     }
 }
