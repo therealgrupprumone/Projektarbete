@@ -7,6 +7,7 @@ import se.iths.projektarbete.entity.FeedEntity;
 import se.iths.projektarbete.mapper.FeedMapper;
 import se.iths.projektarbete.repo.FeedRepo;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +33,8 @@ public class FeedService {
     public Feed findByFeedId(Long id) {
         return feedRepo.findById(id)
                 .map(mapper::toDto)
-                .orElseThrow();
+                .orElseThrow(() ->
+                        new EntityNotFoundException("Feed with id: " + id + " does not exist"));
     }
 
     public Feed createFeed(Feed feed) {
