@@ -1,12 +1,14 @@
 package se.iths.projektarbete.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@RequiredArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -20,7 +22,5 @@ public class FeedEntity {
     @NonNull
     @OneToMany(mappedBy = "feed", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<MessageEntity> chatMessages;
-
-
 
 }
