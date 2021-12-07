@@ -24,15 +24,7 @@ public class UserEntity {
     @NonNull
     private String password;
 
-    @ManyToMany(cascade = {
-            CascadeType.ALL
-    },
-            fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "role_user",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<RoleEntity> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
