@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,11 +21,12 @@ public class RoleEntity {
     @NonNull
     private String role;
 
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
-    private Set<UserEntity> userEntitySet = new HashSet<>();
-
+    @ManyToMany(mappedBy = "roles")
+    private Set<UserEntity> users;
+    
     @JsonIgnore
-    public Set<UserEntity> getUserEntitySet() {
-        return userEntitySet;
+    public Set<UserEntity> getUsers() {
+        return users;
     }
+
 }
