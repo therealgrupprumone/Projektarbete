@@ -18,12 +18,14 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepo userRepo;
-    private final UserMapper mapper;
+    private final UserMapper userMapper;
     private final RoleRepo roleRepo;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public UserService(UserRepo userRepo, RoleRepo roleRepo) {
+
+    public UserService(UserRepo userRepo, UserMapper userMapper, RoleRepo roleRepo) {
         this.userRepo = userRepo;
+        this.userMapper = userMapper;
         this.roleRepo = roleRepo;
     }
 
@@ -32,14 +34,15 @@ public class UserService {
         Iterable<UserEntity> foundUsers = userRepo.findAll();
         System.out.println(foundUsers);
         foundUsers.forEach(user -> {
-            allUsers.add(mapper.toDto(user));
+            allUsers.add(userMapper.toDto(user));
         });
         return allUsers;
     }
 
-    public UserEntity createUser(UserEntity userEntity) {
+
+    public UserEntity createUser(UserEntity userEntity, String role) {
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-        RoleEntity roleToAdd = roleRepo.findByRole("ROLE_USER");
+        RoleEntity roleToAdd = roleRepo.findByRole(role);
         userEntity.addRole(roleToAdd);
         return userRepo.save(userEntity);
     }
@@ -52,14 +55,14 @@ public class UserService {
 
     public User getUser(Long id) {
         return userRepo.findById(id)
-                .map(mapper::toDto)
+                .map(userMapper::toDto)
                 .orElseThrow(() ->
                         new EntityNotFoundException("User with id: " + id + " does not exist"));
     }
 
 
     public User createUser(User user) {
-        userRepo.save(mapper.fromDto(user));
+        userRepo.save(userMapper.fromDto(user));
         return user;
     }
 

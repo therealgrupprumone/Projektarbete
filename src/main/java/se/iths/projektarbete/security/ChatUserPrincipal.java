@@ -25,7 +25,7 @@ public class ChatUserPrincipal implements UserDetails {
         Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>(roles.size());
 
         for (RoleEntity role : roles) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole().toUpperCase()));
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName().toUpperCase()));
         }
         return grantedAuthorities;
     }
