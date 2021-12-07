@@ -25,5 +25,4 @@ public class MessageService {
         });
         return allMessages;
     }
-
 }
