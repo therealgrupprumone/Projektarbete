@@ -1,12 +1,13 @@
 package se.iths.projektarbete.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@RequiredArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -17,7 +18,6 @@ public class FeedEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NonNull
     @OneToMany(mappedBy = "feedEntity", cascade = CascadeType.ALL)
     private List<MessageEntity> messageEntityList;
 
