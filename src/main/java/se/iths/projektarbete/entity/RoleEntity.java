@@ -23,10 +23,10 @@ public class RoleEntity {
     private String role;
 
     @ManyToMany(mappedBy = "roles")
-    private Set<UserEntity> userEntitySet = new HashSet<>();
+    private Set<UserEntity> users = new HashSet<>();
 
     @JsonIgnore
-    public Set<UserEntity> getUserEntitySet() {
-        return userEntitySet;
+    public Set<UserEntity> getUsers() {
+        return users;
     }
 }
