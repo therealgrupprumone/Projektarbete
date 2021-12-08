@@ -10,10 +10,10 @@ import se.iths.projektarbete.jms.model.MessageObject;
 @Component
 public class Receiver {
 
-    @JmsListener(destination = JmsConfig.JU20_QUEUE)
-    public void listen(@Payload MessageObject messageObject) {
-        System.out.println("I got a message");
-        System.out.println(messageObject);
-    }
+//    @JmsListener(destination = JmsConfig.JU20_QUEUE)
+//    public void listen(@Payload MessageObject messageObject) {
+//        System.out.println("I got a message");
+//        System.out.println(messageObject);
+//    }
 
 }
