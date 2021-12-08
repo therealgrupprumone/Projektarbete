@@ -10,9 +10,9 @@ import se.iths.projektarbete.jms.model.MessageObject;
 @Component
 public class Receiver {
 
-//    @JmsListener(destination = JmsConfig.JU20_QUEUE)
+//    @JmsListener(destination = JmsConfig.CHAT_APP_QUEUE)
 //    public void listen(@Payload MessageObject messageObject) {
-//        System.out.println("I got a message");
+//        System.out.println("I got a list with active user");
 //        System.out.println(messageObject);
 //    }
 

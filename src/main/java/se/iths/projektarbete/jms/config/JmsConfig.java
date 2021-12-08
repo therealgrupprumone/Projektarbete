@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 @Configuration
 public class JmsConfig {
 
-    public static final String JU20_QUEUE = "ju20-queue";
+    public static final String CHAT_APP_QUEUE = "ju20-queue";
 
     @Bean
     public MessageConverter messageConverter() {
