@@ -19,7 +19,7 @@ public class MessageEntity {
     private Long id;
 
     @NonNull
-    private String message;
+    private String chatMessage;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -31,7 +31,7 @@ public class MessageEntity {
     @ManyToOne
     @JoinColumn(name = "feed_id")
     @NonNull
-    private FeedEntity feedEntity;
+    private FeedEntity feed;
 
     @JsonIgnore
     public UserEntity getUser() {
@@ -44,7 +44,7 @@ public class MessageEntity {
     }
 
     @JsonIgnore
-    public FeedEntity getFeedEntity() {
-        return feedEntity;
+    public FeedEntity getFeed() {
+        return feed;
     }
 }

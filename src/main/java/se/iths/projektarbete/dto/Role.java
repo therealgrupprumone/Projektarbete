@@ -13,11 +13,11 @@ import java.util.Set;
 public class Role {
 
     private Long id;
-    private String role;
+    private String roleName;
     private Set<User> users = new HashSet<>();
 
-    public Role(String role) {
-        this.role = role;
+    public Role(String roleName) {
+        this.roleName = roleName;
     }
 
     public Set<User> getUsers() {

@@ -20,7 +20,7 @@ public class RoleEntity {
     private Long id;
 
     @NonNull
-    private String role;
+    private String roleName;
 
     @ManyToMany(mappedBy = "roles")
     private Set<UserEntity> users = new HashSet<>();

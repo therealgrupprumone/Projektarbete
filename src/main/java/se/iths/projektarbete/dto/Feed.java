@@ -12,6 +12,6 @@ import java.util.List;
 public class Feed {
 
     private Long id;
-    private List<Message> messages;
+    private List<Message> chatMessages;
 
 }
