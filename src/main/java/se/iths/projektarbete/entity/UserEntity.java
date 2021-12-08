@@ -48,8 +48,4 @@ public class UserEntity {
         messages.add(messageEntity);
         messageEntity.setUser(this);
     }
-
-    public Set<MessageEntity> getMessages() {
-        return messages;
-    }
 }

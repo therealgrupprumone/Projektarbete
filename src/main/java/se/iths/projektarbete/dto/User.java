@@ -15,7 +15,9 @@ public class User {
     private Long id;
     private String username;
     private String password;
+    @NonNull
     private Set<Role> roles = new HashSet<>();
+    @NonNull
     private Set<Message> messages = new HashSet<>();
 
     public User(String username, String password) {
