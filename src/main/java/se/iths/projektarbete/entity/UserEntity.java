@@ -1,6 +1,5 @@
 package se.iths.projektarbete.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,7 +22,6 @@ public class UserEntity {
     @NonNull
     private String username;
     @NonNull
-    @JsonIgnore
     private String password;
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
@@ -37,7 +35,7 @@ public class UserEntity {
     )
     private Set<RoleEntity> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<MessageEntity> messageEntitySet = new HashSet<>();
 
 
@@ -51,7 +49,6 @@ public class UserEntity {
         messageEntity.setUser(this);
     }
 
-    @JsonIgnore
     public Set<MessageEntity> getMessageEntitySet() {
         return messageEntitySet;
     }

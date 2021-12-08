@@ -16,8 +16,8 @@ import java.util.List;
 @AllArgsConstructor
 public class RoleService {
 
-    private RoleRepo roleRepo;
     private final RoleMapper mapper;
+    private RoleRepo roleRepo;
 
     public List<Role> findAllRoles() {
         List<Role> allRoles = new ArrayList<>();
@@ -33,5 +33,9 @@ public class RoleService {
                 .map(mapper::toDto)
                 .orElseThrow(() ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "No user found for id " + id));
+    }
+
+    public Role createRole(Role role) {
+        return mapper.toDto(roleRepo.save(mapper.fromDto(role)));
     }
 }

@@ -1,11 +1,11 @@
 package se.iths.projektarbete.dto;
 
 import lombok.*;
-import se.iths.projektarbete.entity.FeedEntity;
-import se.iths.projektarbete.entity.UserEntity;
+
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
+@RequiredArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
@@ -13,9 +13,12 @@ import java.time.LocalDateTime;
 public class Message {
 
     private Long id;
-    private String message;
-    private UserEntity user;
+    @NonNull
+    private String chatMessage;
+    @NonNull
+    private User user;
     private LocalDateTime createdAt;
-    private FeedEntity feedEntity;
+    @NonNull
+    private Feed feed;
 
 }
