@@ -33,6 +33,11 @@ public class MessageEntity {
     @NonNull
     private FeedEntity feedEntity;
 
+    @JsonIgnore
+    public UserEntity getUser() {
+        return user;
+    }
+
     @PrePersist
     public void getCurrentDate() {
         setCreatedAt(LocalDateTime.now());

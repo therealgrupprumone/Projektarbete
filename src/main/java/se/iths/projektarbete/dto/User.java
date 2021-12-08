@@ -1,9 +1,7 @@
 package se.iths.projektarbete.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import se.iths.projektarbete.entity.MessageEntity;
-import se.iths.projektarbete.entity.RoleEntity;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,9 +14,24 @@ public class User {
 
     private Long id;
     private String username;
-    @JsonIgnore
     private String password;
-    private Set<RoleEntity> roles = new HashSet<>();
-    private Set<MessageEntity> messageEntitySet = new HashSet<>();
+    private Set<Role> roles = new HashSet<>();
+    private Set<Message> messages = new HashSet<>();
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public void addRole(Role role) {
+        roles.add(role);
+        role.getUsers().add(this);
+
+    }
+
+    public void addMessage(Message message) {
+        messages.add(message);
+        message.setUser(this);
+    }
 
 }

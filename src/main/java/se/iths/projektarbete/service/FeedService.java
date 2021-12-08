@@ -6,20 +6,23 @@ import se.iths.projektarbete.dto.Feed;
 import se.iths.projektarbete.entity.FeedEntity;
 import se.iths.projektarbete.mapper.FeedMapper;
 import se.iths.projektarbete.repo.FeedRepo;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class FeedService {
 
-    private FeedRepo feedRepo;
     private final FeedMapper mapper;
+    private FeedRepo feedRepo;
 
     public List<Feed> findAll() {
-        List<Feed> allFeeds = new ArrayList<>();
+
+
+        List<se.iths.projektarbete.dto.Feed> allFeeds = new ArrayList<>();
         Iterable<FeedEntity> foundFeeds = feedRepo.findAll();
+
         foundFeeds.forEach(feed -> {
             allFeeds.add(mapper.toDto(feed));
         });
@@ -31,4 +34,10 @@ public class FeedService {
                 .map(mapper::toDto)
                 .orElseThrow();
     }
+
+    public Feed createFeed(Feed feed) {
+        return mapper.toDto(feedRepo.save(mapper.fromDto(feed)));
+    }
+
+
 }

@@ -8,6 +8,8 @@ import se.iths.projektarbete.dto.User;
 import se.iths.projektarbete.entity.UserEntity;
 import se.iths.projektarbete.mapper.UserMapper;
 import se.iths.projektarbete.repo.UserRepo;
+
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +23,7 @@ public class UserService {
     public List<User> getAllUsers() {
         List<User> allUsers = new ArrayList<>();
         Iterable<UserEntity> foundUsers = userRepo.findAll();
+        System.out.println(foundUsers);
         foundUsers.forEach(user -> {
             allUsers.add(mapper.toDto(user));
         });
@@ -34,6 +37,7 @@ public class UserService {
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "No user found for id " + id));
     }
 
+    @Transactional
     public User createUser(User user) {
         userRepo.save(mapper.fromDto(user));
         return user;
