@@ -36,20 +36,20 @@ public class UserEntity {
     private Set<RoleEntity> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<MessageEntity> messageEntitySet = new HashSet<>();
+    private Set<MessageEntity> messages = new HashSet<>();
 
 
     public void addRole(RoleEntity roleEntity) {
         roles.add(roleEntity);
-        roleEntity.getUserEntitySet().add(this);
+        roleEntity.getUsers().add(this);
     }
 
     public void addMessage(MessageEntity messageEntity) {
-        messageEntitySet.add(messageEntity);
+        messages.add(messageEntity);
         messageEntity.setUser(this);
     }
 
-    public Set<MessageEntity> getMessageEntitySet() {
-        return messageEntitySet;
+    public Set<MessageEntity> getMessages() {
+        return messages;
     }
 }
