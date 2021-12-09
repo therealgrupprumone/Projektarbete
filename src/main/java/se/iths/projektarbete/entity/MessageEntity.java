@@ -28,10 +28,6 @@ public class MessageEntity {
 
     private LocalDateTime createdAt;
 
-    @ManyToOne
-    @JoinColumn(name = "feed_id")
-    @NonNull
-    private FeedEntity feed;
 
     @JsonIgnore
     public UserEntity getUser() {
@@ -41,10 +37,6 @@ public class MessageEntity {
     @PrePersist
     public void getCurrentDate() {
         setCreatedAt(LocalDateTime.now());
-    }
 
-    @JsonIgnore
-    public FeedEntity getFeed() {
-        return feed;
     }
 }
