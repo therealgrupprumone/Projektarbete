@@ -9,7 +9,6 @@ import se.iths.projektarbete.mapper.MessageMapper;
 import se.iths.projektarbete.repo.MessageRepo;
 import se.iths.projektarbete.repo.UserRepo;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,11 +29,9 @@ public class MessageService {
         return allMessages;
     }
 
-    @Transactional
-    public void createMessage(Message message) {
-
-        UserEntity byUsername = userRepo.findByUsername(message.getUsername());
+    public void createMessage(MessageEntity message) {
+        UserEntity byUsername = userRepo.findByUsername(message.getUser().getUsername());
         userRepo.save(byUsername);
-        messageRepo.save(mapper.fromDto(message));
+        messageRepo.save(message);
     }
 }
