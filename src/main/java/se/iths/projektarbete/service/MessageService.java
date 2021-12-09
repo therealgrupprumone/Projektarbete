@@ -33,7 +33,7 @@ public class MessageService {
     @Transactional
     public void createMessage(Message message) {
 
-        UserEntity byUsername = userRepo.findByUsername(message.getUser().getUsername());
+        UserEntity byUsername = userRepo.findByUsername(message.getUsername());
         userRepo.save(byUsername);
         messageRepo.save(mapper.fromDto(message));
     }

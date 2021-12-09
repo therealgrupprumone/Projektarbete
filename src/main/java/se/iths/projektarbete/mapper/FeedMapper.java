@@ -1,6 +1,7 @@
 package se.iths.projektarbete.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import se.iths.projektarbete.dto.Feed;
@@ -12,6 +13,7 @@ public interface FeedMapper {
     @Autowired
     FeedMapper INSTANCE = Mappers.getMapper(FeedMapper.class);
 
+    @Mapping(source = "")
     Feed toDto(FeedEntity entity);
 
     FeedEntity fromDto(Feed feed);
