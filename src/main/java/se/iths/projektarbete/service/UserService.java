@@ -9,7 +9,6 @@ import se.iths.projektarbete.entity.UserEntity;
 import se.iths.projektarbete.mapper.UserMapper;
 import se.iths.projektarbete.repo.UserRepo;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +36,6 @@ public class UserService {
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "No user found for id " + id));
     }
 
-    @Transactional
     public User createUser(User user) {
         userRepo.save(mapper.fromDto(user));
         return user;

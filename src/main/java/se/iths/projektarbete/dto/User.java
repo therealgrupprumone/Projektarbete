@@ -1,5 +1,6 @@
 package se.iths.projektarbete.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.util.HashSet;
@@ -15,9 +16,7 @@ public class User {
     private Long id;
     private String username;
     private String password;
-    @NonNull
     private Set<Role> roles = new HashSet<>();
-    @NonNull
     private Set<Message> messages = new HashSet<>();
 
     public User(String username, String password) {
@@ -36,4 +35,8 @@ public class User {
         message.setUser(this);
     }
 
+    @JsonIgnore
+    public Set<Message> getMessages() {
+        return messages;
+    }
 }
