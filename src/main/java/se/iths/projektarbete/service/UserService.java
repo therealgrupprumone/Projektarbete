@@ -6,11 +6,9 @@ import se.iths.projektarbete.dto.User;
 import se.iths.projektarbete.entity.RoleEntity;
 import se.iths.projektarbete.entity.UserEntity;
 import se.iths.projektarbete.mapper.UserMapper;
-import se.iths.projektarbete.repo.RoleRepo;
 import se.iths.projektarbete.repo.UserRepo;
 
 import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,14 +19,14 @@ public class UserService {
 
     private final UserRepo userRepo;
     private final UserMapper mapper;
-    private final RoleRepo roleRepo;
+//    private final RoleRepo roleRepo;
 
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public UserService(UserRepo userRepo, UserMapper mapper, RoleRepo roleRepo) {
+    public UserService(UserRepo userRepo, UserMapper mapper) {
         this.userRepo = userRepo;
         this.mapper = mapper;
-        this.roleRepo = roleRepo;
+//        this.roleRepo = roleRepo;
     }
 
     public List<User> getAllUsers() {
@@ -39,13 +37,21 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    // TODO Justera denna till att använda DTO?
-    @Transactional
-    public UserEntity createUserEntity(UserEntity userEntity, String role) {
+//    // TODO Justera denna till att använda DTO?
+//    @Transactional
+//    public UserEntity createUserEntity(UserEntity userEntity, String role) {
+//        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+//        RoleEntity roleToAdd = roleRepo.findByRole(role);
+//        userEntity.addRole(roleToAdd);
+//        return userRepo.save(userEntity);
+//    }
+
+    public UserEntity createUserEntity(UserEntity userEntity) {
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-        RoleEntity roleToAdd = roleRepo.findByRole(role);
-        userEntity.addRole(roleToAdd);
+        RoleEntity roleEntity = new RoleEntity("ROLE_USER");
+        userEntity.addRole(roleEntity);
         return userRepo.save(userEntity);
+
     }
 
     public void deleteUser(Long id) {
