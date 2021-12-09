@@ -2,8 +2,8 @@ package se.iths.projektarbete.service;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import se.iths.projektarbete.dto.Role;
 import se.iths.projektarbete.dto.User;
-import se.iths.projektarbete.entity.RoleEntity;
 import se.iths.projektarbete.entity.UserEntity;
 import se.iths.projektarbete.mapper.UserMapper;
 import se.iths.projektarbete.repo.UserRepo;
@@ -46,11 +46,14 @@ public class UserService {
 //        return userRepo.save(userEntity);
 //    }
 
-    public UserEntity createUserEntity(UserEntity userEntity) {
-        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-        RoleEntity roleEntity = new RoleEntity("ROLE_USER");
-        userEntity.addRole(roleEntity);
-        return userRepo.save(userEntity);
+    public User createUserEntity(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        Role role = new Role("ROLE_USER");
+        user.addRole(role);
+
+        UserEntity dtoToUserEntity = mapper.fromDto(user);
+
+        return mapper.toDto(userRepo.save(dtoToUserEntity));
 
     }
 
