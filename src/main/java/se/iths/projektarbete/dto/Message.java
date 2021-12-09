@@ -18,7 +18,9 @@ public class Message {
     @NonNull
     private User user;
     private LocalDateTime createdAt;
-    @NonNull
-    private Feed feed;
+
+    //    @NonNull
+//    private Feed feed;
+    private Long feedId;
 
 }
