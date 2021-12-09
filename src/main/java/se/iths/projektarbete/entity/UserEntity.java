@@ -27,7 +27,7 @@ public class UserEntity {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<RoleEntity> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<MessageEntity> messages = new HashSet<>();
 
     public void addRole(RoleEntity roleEntity) {

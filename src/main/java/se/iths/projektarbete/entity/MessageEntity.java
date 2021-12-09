@@ -21,7 +21,7 @@ public class MessageEntity {
     @NonNull
     private String chatMessage;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     @NonNull
     private UserEntity user;
