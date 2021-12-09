@@ -7,13 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import se.iths.projektarbete.dto.Feed;
 import se.iths.projektarbete.entity.FeedEntity;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {MessageMapper.class})
 public interface FeedMapper {
 
     @Autowired
     FeedMapper INSTANCE = Mappers.getMapper(FeedMapper.class);
 
-    @Mapping(source = "")
     Feed toDto(FeedEntity entity);
 
     FeedEntity fromDto(Feed feed);

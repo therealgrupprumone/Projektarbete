@@ -18,7 +18,9 @@ public class FeedEntity {
     private Long id;
 
     @NonNull
-    @OneToMany(mappedBy = "feed", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "feed", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<MessageEntity> chatMessages;
+
+
 
 }
