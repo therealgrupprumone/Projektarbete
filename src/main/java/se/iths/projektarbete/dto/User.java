@@ -32,7 +32,7 @@ public class User {
 
     public void addMessage(Message message) {
         messages.add(message);
-        message.setUser(this);
+        message.setUsername(this.username);
     }
 
     @JsonIgnore

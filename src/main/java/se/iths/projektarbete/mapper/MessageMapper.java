@@ -13,9 +13,13 @@ public interface MessageMapper {
     @Autowired
     MessageMapper INSTANCE = Mappers.getMapper(MessageMapper.class);
 
-    @Mapping(source = "message.feed.id", target = "feedId")
+    //spara bara username
+//    @Mapping(target = "feed", ignore = true)
+    @Mapping(source = "user.username", target = "username")
+    @Mapping(source = "feed.id", target = "feedId")
     Message toDto(MessageEntity message);
 
+    //    @Mapping(target = "feed", ignore = true)
     MessageEntity fromDto(Message message);
 
 }
