@@ -15,10 +15,10 @@ public class Message {
     private Long id;
     @NonNull
     private String chatMessage;
-    //    @NonNull
+
     private String username;
     private LocalDateTime createdAt;
-    //    @NonNull
+
     private Long feedId;
 
 }

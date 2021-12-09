@@ -33,7 +33,6 @@ public class MessageEntity {
     @NonNull
     private FeedEntity feed;
 
-    @JsonIgnore
     public UserEntity getUser() {
         return user;
     }
