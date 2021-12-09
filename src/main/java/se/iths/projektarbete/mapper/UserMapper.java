@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import se.iths.projektarbete.dto.User;
 import se.iths.projektarbete.entity.UserEntity;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {RoleMapper.class})
 public interface UserMapper {
 
     @Autowired
