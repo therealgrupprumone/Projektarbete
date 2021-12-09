@@ -11,49 +11,35 @@ import se.iths.projektarbete.repo.UserRepo;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
 public class UserService {
 
     private final UserRepo userRepo;
-    private final UserMapper mapper;
-//    private final RoleRepo roleRepo;
-
+    private final UserMapper userMapper;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public UserService(UserRepo userRepo, UserMapper mapper) {
         this.userRepo = userRepo;
-        this.mapper = mapper;
-//        this.roleRepo = roleRepo;
+        this.userMapper = mapper;
     }
 
     public List<User> getAllUsers() {
-        Iterable<UserEntity> foundUsers = userRepo.findAll();
-
-        return StreamSupport.stream(foundUsers.spliterator(), false)
-                .map(mapper::toDto)
-                .collect(Collectors.toList());
+        return StreamSupport.stream(userRepo.findAll().spliterator(), false)
+                .map(userMapper::toDto)
+                .toList();
     }
 
-//    // TODO Justera denna till att använda DTO?
-//    @Transactional
-//    public UserEntity createUserEntity(UserEntity userEntity, String role) {
-//        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-//        RoleEntity roleToAdd = roleRepo.findByRole(role);
-//        userEntity.addRole(roleToAdd);
-//        return userRepo.save(userEntity);
-//    }
-
-    public User createUserEntity(User user) {
+    public User createUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         Role role = new Role("ROLE_USER");
         user.addRole(role);
 
-        UserEntity dtoToUserEntity = mapper.fromDto(user);
+        UserEntity dtoToUserEntity = userMapper.fromDto(user);
 
-        return mapper.toDto(userRepo.save(dtoToUserEntity));
+        return userMapper.toDto(userRepo.save(dtoToUserEntity));
 
     }
 
@@ -65,19 +51,13 @@ public class UserService {
 
     public User getUser(Long id) {
         return userRepo.findById(id)
-                .map(mapper::toDto)
+                .map(userMapper::toDto)
                 .orElseThrow(() ->
                         new EntityNotFoundException("User with id: " + id + " does not exist"));
     }
 
-    public User createDtoUser(User user) {
-        userRepo.save(mapper.fromDto(user));
-        return user;
-    }
-
     public Optional<UserEntity> findById(Long id) {
         return userRepo.findById(id);
-
     }
 
 }

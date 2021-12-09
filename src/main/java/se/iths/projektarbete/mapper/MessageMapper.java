@@ -17,6 +17,8 @@ public interface MessageMapper {
     @Mapping(source = "feed.id", target = "feedId")
     Message toDto(MessageEntity message);
 
+    @Mapping(source = "username", target = "user.username")
+    @Mapping(source = "feedId", target = "feed.id")
     MessageEntity fromDto(Message message);
 
 }

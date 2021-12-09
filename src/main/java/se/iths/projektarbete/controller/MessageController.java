@@ -2,12 +2,11 @@ package se.iths.projektarbete.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import se.iths.projektarbete.dto.Message;
 import se.iths.projektarbete.service.MessageService;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -20,5 +19,11 @@ public class MessageController {
     @GetMapping
     public ResponseEntity<List<Message>> getAllMessages() {
         return ResponseEntity.ok(messageService.findAll());
+    }
+
+    @PostMapping
+    public ResponseEntity<Message> postMessage(@RequestBody Message message, Principal principal) {
+        message.setUsername(principal.getName());
+        return ResponseEntity.ok(messageService.postMessage(message));
     }
 }

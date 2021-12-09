@@ -9,6 +9,7 @@ import se.iths.projektarbete.mapper.MessageMapper;
 import se.iths.projektarbete.repo.MessageRepo;
 import se.iths.projektarbete.repo.UserRepo;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,5 +34,11 @@ public class MessageService {
         UserEntity byUsername = userRepo.findByUsername(message.getUser().getUsername());
         userRepo.save(byUsername);
         messageRepo.save(message);
+    }
+
+    @Transactional
+    public Message postMessage(Message message) {
+        return mapper.toDto((messageRepo.save(mapper.fromDto(message))));
+
     }
 }
