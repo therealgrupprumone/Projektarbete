@@ -18,6 +18,8 @@ import se.iths.projektarbete.service.MessageService;
 import se.iths.projektarbete.service.RoleService;
 import se.iths.projektarbete.service.UserService;
 
+import java.util.List;
+
 @Configuration
 @Slf4j
 public class PopulateDatabase {
@@ -51,10 +53,13 @@ public class PopulateDatabase {
             UserEntity albert = new UserEntity("albert", "danmark");
             UserEntity casper = new UserEntity("casper", "ungern");
 
-            userService.createUserEntity(jannis);
-            userService.createUserEntity(joakim);
-            userService.createUserEntity(albert);
-            userService.createUserEntity(casper);
+            userRepo.saveAll(List.of(jannis, joakim, albert, casper));
+
+
+//            userService.createUserEntity(jannis);
+//            userService.createUserEntity(joakim);
+//            userService.createUserEntity(albert);
+//            userService.createUserEntity(casper);
 
             MessageEntity message1 = new MessageEntity("Hello from jannis", jannis, feedEntity);
             MessageEntity message2 = new MessageEntity("Hello from joakim", joakim, feedEntity);

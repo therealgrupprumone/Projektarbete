@@ -2,6 +2,7 @@ package se.iths.projektarbete.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import java.util.Set;
 @Builder
 @Getter
 @Setter
+@ToString
 public class User {
 
     private Long id;
