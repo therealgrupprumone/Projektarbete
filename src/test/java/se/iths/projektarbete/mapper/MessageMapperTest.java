@@ -14,43 +14,89 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class MessageMapperTest {
 
     private final MessageMapper messageMapper = Mappers.getMapper(MessageMapper.class);
-
-
+    
     @Test
     void mappingMessageEntityToMessageDtoSavesUsername() {
-        var messageEntity = new MessageEntity("Hello", new UserEntity("Albert", "password"), new FeedEntity());
+        var userEntity = new UserEntity("username", "password");
+        var messageEntity = new MessageEntity();
+
+        messageEntity.setUser(userEntity);
+        messageEntity.setChatMessage("This must not be null");
 
         var messageDto = messageMapper.toDto(messageEntity);
 
-        assertEquals("Albert", messageDto.getUsername());
+        assertEquals("username", messageDto.getUsername());
     }
 
     @Test
     void mappingMessageEntityToMessageDtoSavesChatmessage() {
-        var messageEntity = new MessageEntity("Hello", new UserEntity("Albert", "password"), new FeedEntity());
+        var messageEntity = new MessageEntity();
+        messageEntity.setChatMessage("This is a message");
 
         var messageDto = messageMapper.toDto(messageEntity);
 
-        assertEquals("Hello", messageDto.getChatMessage());
+        assertEquals("This is a message", messageDto.getChatMessage());
+    }
+
+    @Test
+    void mappingMessageEntityToMessageDtoSavesFeedId() {
+        var feedEntity = new FeedEntity();
+        feedEntity.setId(5L);
+        var messageEntity = new MessageEntity();
+        messageEntity.setChatMessage("This is a message");
+        messageEntity.setFeed(feedEntity);
+
+        var messageDto = messageMapper.toDto(messageEntity);
+
+        assertEquals(5L, messageDto.getFeedId());
+    }
+
+    @Test
+    void mappingMessageEntityToMessageDtoSavesCreatedAt() {
+
+        var messageEntity = new MessageEntity();
+        var createdAt = LocalDateTime.now();
+
+        messageEntity.setChatMessage("This must not be null");
+        messageEntity.setCreatedAt(createdAt);
+
+        var messageDto = messageMapper.toDto(messageEntity);
+
+        assertEquals(createdAt, messageDto.getCreatedAt());
     }
 
     @Test
     void mappingMessageDtoToMessageEntitySavesUsername() {
         var messageDto = new Message();
         messageDto.setUsername("batman");
-        messageDto.setChatMessage("im batman");
-        messageDto.setFeedId(1L);
-
-        var createdAt = LocalDateTime.now();
-        messageDto.setCreatedAt(createdAt);
+        messageDto.setChatMessage("im batman"); // This is non-null so it needs to be set
 
         var messageEntity = messageMapper.fromDto(messageDto);
 
         assertEquals("batman", messageEntity.getUser().getUsername());
-        assertEquals("im batman", messageEntity.getChatMessage());
-        assertEquals(1L, messageEntity.getFeed().getId());
-        assertEquals(createdAt, messageEntity.getCreatedAt());
+    }
 
+    @Test
+    void mappingMessageDtoToMessageEntitySavesChatmessage() {
+        var messageDto = new Message();
+        messageDto.setUsername("robin"); // This is non-null so it needs to be set
+        messageDto.setChatMessage("im robin");
+
+        var messageEntity = messageMapper.fromDto(messageDto);
+
+        assertEquals("im robin", messageEntity.getChatMessage());
+    }
+
+    @Test
+    void mappingMessageDtoToMessageEntitySavesFeedId() {
+        var messageDto = new Message();
+        messageDto.setUsername("robin"); // This is non-null so it needs to be set
+        messageDto.setChatMessage("im robin"); // This is non-null so it needs to be set
+        messageDto.setFeedId(5L);
+
+        var messageEntity = messageMapper.fromDto(messageDto);
+
+        assertEquals(5L, messageEntity.getFeed().getId());
     }
 
 
