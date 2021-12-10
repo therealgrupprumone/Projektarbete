@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import se.iths.projektarbete.dto.Role;
 import se.iths.projektarbete.dto.User;
 import se.iths.projektarbete.entity.UserEntity;
+import se.iths.projektarbete.exception.UserNameTakenException;
 import se.iths.projektarbete.mapper.UserMapper;
 import se.iths.projektarbete.repo.UserRepo;
 
@@ -54,6 +55,21 @@ public class UserService {
                 .map(userMapper::toDto)
                 .orElseThrow(() ->
                         new EntityNotFoundException("User with id: " + id + " does not exist"));
+    }
+
+    public User createDtoUser(User user) throws UserNameTakenException {
+        if (isUsernameTaken(user.getUsername()))
+            throw new UserNameTakenException("Please change username, " + user.getUsername() + " is taken");
+        userRepo.save(userMapper.fromDto(user));
+        return user;
+    }
+
+    private boolean isUsernameTaken(String username) {
+        return findByUsername(username) != null;
+    }
+
+    private UserEntity findByUsername(String username) {
+        return userRepo.findByUsername(username);
     }
 
     public Optional<UserEntity> findById(Long id) {

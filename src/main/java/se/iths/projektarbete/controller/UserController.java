@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.iths.projektarbete.dto.Role;
 import se.iths.projektarbete.dto.User;
+import se.iths.projektarbete.exception.UserNameTakenException;
 import se.iths.projektarbete.service.RoleService;
 import se.iths.projektarbete.service.UserService;
 
@@ -34,7 +35,8 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        return ResponseEntity.ok(userService.createUser(user));
+    public ResponseEntity<User> createUser(@RequestBody User user) throws UserNameTakenException {
+        userService.createDtoUser(user);
+        return ResponseEntity.ok(user);
     }
 }
