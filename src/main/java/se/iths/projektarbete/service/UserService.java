@@ -32,7 +32,9 @@ public class UserService {
                 .toList();
     }
 
-    public User createUser(User user) {
+    public User createUser(User user) throws UserNameTakenException {
+        if (isUsernameTaken(user.getUsername()))
+            throw new UserNameTakenException("Please change username, " + user.getUsername() + " is taken");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         Role role = new Role("ROLE_USER");
@@ -55,13 +57,6 @@ public class UserService {
                 .map(userMapper::toDto)
                 .orElseThrow(() ->
                         new EntityNotFoundException("User with id: " + id + " does not exist"));
-    }
-
-    public User createDtoUser(User user) throws UserNameTakenException {
-        if (isUsernameTaken(user.getUsername()))
-            throw new UserNameTakenException("Please change username, " + user.getUsername() + " is taken");
-        userRepo.save(userMapper.fromDto(user));
-        return user;
     }
 
     private boolean isUsernameTaken(String username) {
