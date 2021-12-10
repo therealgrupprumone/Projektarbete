@@ -51,6 +51,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         ApiError apiError = new ApiError(NOT_FOUND);
         apiError.setMessage(ex.getMessage());
         return buildResponseEntity(apiError);
+    }
 
+    @ExceptionHandler(UserNameTakenException.class)
+    protected ResponseEntity<Object> handleUsernameTaken(UserNameTakenException ex) {
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST);
+        apiError.setMessage(ex.getMessage());
+        return buildResponseEntity(apiError);
     }
 }
