@@ -9,7 +9,6 @@ import se.iths.projektarbete.mapper.MessageMapper;
 import se.iths.projektarbete.repo.MessageRepo;
 import se.iths.projektarbete.repo.UserRepo;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,9 +35,14 @@ public class MessageService {
         messageRepo.save(message);
     }
 
-    @Transactional
     public Message postMessage(Message message) {
-        return mapper.toDto((messageRepo.save(mapper.fromDto(message))));
+        // TODO Hantera fall där användaren inte finns - kommer det hända?
+        UserEntity byUsername = userRepo.findByUsername(message.getUsername());
+
+        MessageEntity messageEntity = mapper.fromDto(message);
+        messageEntity.setUser(byUsername);
+
+        return mapper.toDto(messageRepo.save(messageEntity));
 
     }
 }

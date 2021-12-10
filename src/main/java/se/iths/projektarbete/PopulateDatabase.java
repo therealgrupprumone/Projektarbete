@@ -47,11 +47,6 @@ public class PopulateDatabase {
             RoleEntity roleUser = new RoleEntity("ROLE_USER");
             roleRepo.save(roleAdmin);
             roleRepo.save(roleUser);
-//
-//            UserEntity jannis = new UserEntity("jannis", "tyskland");
-//            UserEntity joakim = new UserEntity("joakim", "sverige");
-//            UserEntity albert = new UserEntity("albert", "danmark");
-//            UserEntity casper = new UserEntity("casper", "ungern");
 
             User user = new User("boalbert", "hej");
             userService.createUser(user);
@@ -63,6 +58,8 @@ public class PopulateDatabase {
             messageService.postMessage(firstMessage);
             messageService.postMessage(secondMessage);
             messageService.postMessage(thirdMessage);
+            // TODO Applikation kraschar om man försöker postMessage med ett användarnamn som inte finns
+
 
             log.info("Running with profile: " + profile);
 
