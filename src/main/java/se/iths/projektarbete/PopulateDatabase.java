@@ -10,12 +10,8 @@ import se.iths.projektarbete.dto.User;
 import se.iths.projektarbete.entity.FeedEntity;
 import se.iths.projektarbete.entity.RoleEntity;
 import se.iths.projektarbete.repo.FeedRepo;
-import se.iths.projektarbete.repo.MessageRepo;
 import se.iths.projektarbete.repo.RoleRepo;
-import se.iths.projektarbete.repo.UserRepo;
-import se.iths.projektarbete.service.FeedService;
 import se.iths.projektarbete.service.MessageService;
-import se.iths.projektarbete.service.RoleService;
 import se.iths.projektarbete.service.UserService;
 
 import java.time.LocalDateTime;
@@ -27,16 +23,11 @@ public class PopulateDatabase {
     @Value("${current.profile:default profile}")
     private String profile;
 
-    // CommandLineRunner loadDatabase(MovieRepo movieRepo)
     @Bean
     CommandLineRunner loadDatabase(
-            UserRepo userRepo,
             RoleRepo roleRepo,
-            MessageRepo messageRepo,
             FeedRepo feedRepo,
-            FeedService feedService,
             UserService userService,
-            RoleService roleService,
             MessageService messageService
     ) {
         return args -> {
@@ -58,8 +49,6 @@ public class PopulateDatabase {
             messageService.postMessage(firstMessage);
             messageService.postMessage(secondMessage);
             messageService.postMessage(thirdMessage);
-            // TODO Applikation kraschar om man försöker postMessage med ett användarnamn som inte finns
-
 
             log.info("Running with profile: " + profile);
 

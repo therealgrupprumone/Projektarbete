@@ -1,6 +1,7 @@
 package se.iths.projektarbete.dto;
 
 import lombok.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,7 +20,4 @@ public class Role {
         this.roleName = roleName;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
 }

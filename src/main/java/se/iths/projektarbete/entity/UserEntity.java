@@ -10,9 +10,10 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@RequiredArgsConstructor
 @AllArgsConstructor
+@RequiredArgsConstructor
 @Table(name = "user")
+@ToString
 public class UserEntity {
 
     @Id
@@ -28,16 +29,7 @@ public class UserEntity {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<RoleEntity> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<MessageEntity> messages = new HashSet<>();
 
-    public void addRole(RoleEntity roleEntity) {
-        roles.add(roleEntity);
-        roleEntity.getUsers().add(this);
-    }
-
-    public void addMessage(MessageEntity messageEntity) {
-        messages.add(messageEntity);
-        messageEntity.setUser(this);
-    }
 }

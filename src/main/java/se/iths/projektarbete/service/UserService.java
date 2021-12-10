@@ -11,7 +11,6 @@ import se.iths.projektarbete.repo.UserRepo;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 @Service
@@ -49,7 +48,8 @@ public class UserService {
     public void deleteUser(Long id) {
         UserEntity foundUser = userRepo.findById(id)
                 .orElseThrow(EntityNotFoundException::new);
-        userRepo.deleteById(foundUser.getId());
+
+        userRepo.delete(foundUser);
     }
 
     public User getUser(Long id) {
@@ -66,9 +66,4 @@ public class UserService {
     private UserEntity findByUsername(String username) {
         return userRepo.findByUsername(username);
     }
-
-    public Optional<UserEntity> findById(Long id) {
-        return userRepo.findById(id);
-    }
-
 }

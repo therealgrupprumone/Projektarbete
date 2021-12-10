@@ -2,7 +2,6 @@ package se.iths.projektarbete.dto;
 
 import lombok.*;
 
-import se.iths.projektarbete.entity.MessageEntity;
 import java.util.List;
 
 @AllArgsConstructor
@@ -14,6 +13,5 @@ public class Feed {
 
     private Long id;
     private List<Message> chatMessages;
-
 
 }

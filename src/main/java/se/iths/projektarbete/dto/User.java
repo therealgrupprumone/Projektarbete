@@ -28,12 +28,6 @@ public class User {
     public void addRole(Role role) {
         roles.add(role);
         role.getUsers().add(this);
-
-    }
-
-    public void addMessage(Message message) {
-        messages.add(message);
-        message.setUsername(this.username);
     }
 
     @JsonIgnore

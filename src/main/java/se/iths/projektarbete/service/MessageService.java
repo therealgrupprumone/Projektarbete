@@ -29,14 +29,7 @@ public class MessageService {
         return allMessages;
     }
 
-    public void createMessage(MessageEntity message) {
-        UserEntity byUsername = userRepo.findByUsername(message.getUser().getUsername());
-        userRepo.save(byUsername);
-        messageRepo.save(message);
-    }
-
     public Message postMessage(Message message) {
-        // TODO Hantera fall där användaren inte finns - kommer det hända?
         UserEntity byUsername = userRepo.findByUsername(message.getUsername());
 
         MessageEntity messageEntity = mapper.fromDto(message);
