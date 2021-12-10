@@ -36,7 +36,6 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) throws UserNameTakenException {
-        userService.createDtoUser(user);
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok(userService.createUser(user));
     }
 }
