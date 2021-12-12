@@ -6,6 +6,7 @@ import se.iths.projektarbete.dto.Role;
 import se.iths.projektarbete.dto.User;
 import se.iths.projektarbete.entity.UserEntity;
 import se.iths.projektarbete.exception.UserNameTakenException;
+import se.iths.projektarbete.jms.sender.Sender;
 import se.iths.projektarbete.mapper.UserMapper;
 import se.iths.projektarbete.repo.UserRepo;
 
@@ -19,10 +20,12 @@ public class UserService {
     private final UserRepo userRepo;
     private final UserMapper userMapper;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final Sender sender;
 
-    public UserService(UserRepo userRepo, UserMapper mapper) {
+    public UserService(UserRepo userRepo, UserMapper mapper, Sender sender) {
         this.userRepo = userRepo;
         this.userMapper = mapper;
+        this.sender = sender;
     }
 
     public List<User> getAllUsers() {
@@ -40,6 +43,7 @@ public class UserService {
         user.addRole(role);
 
         UserEntity dtoToUserEntity = userMapper.fromDto(user);
+        sender.sendMessage(user.getUsername());
 
         return userMapper.toDto(userRepo.save(dtoToUserEntity));
 
