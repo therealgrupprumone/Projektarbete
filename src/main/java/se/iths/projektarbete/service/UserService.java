@@ -2,6 +2,7 @@ package se.iths.projektarbete.service;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import se.iths.projektarbete.dto.EmailNotification;
 import se.iths.projektarbete.dto.Role;
 import se.iths.projektarbete.dto.User;
 import se.iths.projektarbete.entity.UserEntity;
@@ -43,7 +44,8 @@ public class UserService {
         user.addRole(role);
 
         UserEntity dtoToUserEntity = userMapper.fromDto(user);
-        sender.sendMessage(user.getUsername());
+
+        sender.sendMessage(new EmailNotification(user.getUsername(), "sample.email@adress.com"));
 
         return userMapper.toDto(userRepo.save(dtoToUserEntity));
 
