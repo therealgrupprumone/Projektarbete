@@ -14,4 +14,8 @@ COPY --from=build usr/target/projektarbete_komplex_java-0.0.1-SNAPSHOT.jar /usr/
 # Öppna 8080 i image
 EXPOSE 8080
 # Kommando som körs när vi startar vår container, vi startar alltså vår .jar-fil
+<<<<<<< HEAD
 ENTRYPOINT ["java", "-jar", "/usr/app/projektarbete_komplex_java-0.0.1-SNAPSHOT.jar", "--spring.profiles.active=docker"]
+=======
+ENTRYPOINT ["java", "-jar", "/usr/app/projektarbete_komplex_java-0.0.1-SNAPSHOT.jar"]
+>>>>>>> fa07592 (Functioning JMS sender, sends notification when a user is created)
