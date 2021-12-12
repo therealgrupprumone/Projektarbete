@@ -44,7 +44,6 @@ public class UserService {
         user.addRole(role);
 
         UserEntity dtoToUserEntity = userMapper.fromDto(user);
-        sender.sendMessage(user.getUsername());
 
         sender.sendMessage(new EmailNotification(user.getUsername(), user.getEmail()));
 
