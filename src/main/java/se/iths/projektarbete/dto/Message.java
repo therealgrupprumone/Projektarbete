@@ -2,6 +2,7 @@ package se.iths.projektarbete.dto;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-public class Message {
+public class Message implements Serializable {
 
     private Long id;
     @NonNull
