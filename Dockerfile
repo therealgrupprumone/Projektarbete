@@ -14,4 +14,4 @@ COPY --from=build usr/target/projektarbete_komplex_java-0.0.1-SNAPSHOT.jar /usr/
 # Öppna 8080 i image
 EXPOSE 8080
 # Kommando som körs när vi startar vår container, vi startar alltså vår .jar-fil
-ENTRYPOINT ["java", "-jar", "/usr/app/projektarbete_komplex_java-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "/usr/app/projektarbete_komplex_java-0.0.1-SNAPSHOT.jar", "--spring.profiles.active=docker"]
