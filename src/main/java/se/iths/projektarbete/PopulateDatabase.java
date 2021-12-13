@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import se.iths.projektarbete.dto.Message;
 import se.iths.projektarbete.dto.User;
 import se.iths.projektarbete.entity.FeedEntity;
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 
 @Configuration
 @Slf4j
+@Profile("!test")
 public class PopulateDatabase {
 
     @Value("${current.profile:default profile}")
