@@ -31,6 +31,15 @@ public class UserService {
                 .toList();
     }
 
+    public List<User> getAllAdmins() {
+        System.out.println("inne");
+        return
+                StreamSupport.stream(userRepo.findAll().spliterator(), false)
+                .map(userMapper::toDto)
+//                .filter(x -> x.getRoles().contains(new Role("ROLE_ADMIN")))
+                .toList();
+    }
+
     public User createUser(User user) throws UserNameTakenException {
         if (isUsernameTaken(user.getUsername()))
             throw new UserNameTakenException("Please change username, " + user.getUsername() + " is taken");

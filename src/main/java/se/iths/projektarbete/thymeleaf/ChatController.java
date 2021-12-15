@@ -5,9 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import se.iths.projektarbete.dto.Message;
-import se.iths.projektarbete.entity.UserEntity;
-import se.iths.projektarbete.repo.UserRepo;
+import se.iths.projektarbete.dto.User;
 import se.iths.projektarbete.service.MessageService;
+import se.iths.projektarbete.service.UserService;
 
 import java.security.Principal;
 
@@ -16,7 +16,7 @@ import java.security.Principal;
 public class ChatController {
 
     MessageService messageService;
-    UserRepo userRepo;
+    UserService userService;
 
     @GetMapping("/chat")
     String getChat(Model model) {
@@ -25,12 +25,25 @@ public class ChatController {
         return "chat";
     }
 
-    @RequestMapping(value = "/sendMessage", method = RequestMethod.POST)
+    @PostMapping(value = "/sendMessage")
     String sendMessage(@ModelAttribute Message message, Principal principal) {
         message.setUsername(principal.getName());
         message.setFeedId(1L);
         messageService.postMessage(message);
         return "redirect:/chat";
     }
+
+    @PostMapping("createAdmin")
+    String createAdmin (@ModelAttribute User user){
+        userService.createAdmin(user);
+        return "redirect:/tempAdmin";
+    }
+
+    @GetMapping("/tempAdmin")
+    String getAllAdmins (Model model){
+        model.addAttribute("listOfAdmins", userService.getAllAdmins());
+        return "tempAdmin";
+    }
+
 
 }
