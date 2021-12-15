@@ -6,7 +6,20 @@
 </head>
 <body>
 <h1>Admin Console</h1>
-<p>This is the admin console, restricted to administrators only.</p>
+<h2>Add New Admin-User</h2>
+
+<form method="post" action="createAdmin">
+<input type="text" name="username">
+<input type="password" name="password">
+<input type="submit" value="Add admin-user">
+</form>
+
+
+<ol th:each="user: ${listOfAdmins}" >
+    <li th:text="${user.username}"></li>
+</ol>
+
+
 <form method="post" th:action="@{/logout}">
     <input type="submit" value="Sign Out"/>
 </form>
