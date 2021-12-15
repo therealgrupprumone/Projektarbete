@@ -38,13 +38,13 @@ public class ChatController {
     @PostMapping("createAdmin")
     public String createAdmin(@ModelAttribute User user) {
         userService.createAdmin(user);
-        return "redirect:/tempAdmin";
+        return "redirect:/admin";
     }
 
-    @GetMapping("/tempAdmin")
+    @GetMapping("/admin")
     public String getAllAdmins(Model model) {
         model.addAttribute("listOfAdmins", userService.getAllUsers());
-        return "tempAdmin";
+        return "admin";
     }
 
 }

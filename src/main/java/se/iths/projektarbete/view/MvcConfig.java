@@ -14,7 +14,7 @@ public class MvcConfig implements WebMvcConfigurer {
         // Temp files for testing
         registry.addViewController("/").setViewName("tempHome");
         registry.addViewController("/login").setViewName("tempLogin");
-        registry.addViewController("/admin").setViewName("tempAdmin");
+        registry.addViewController("/admin").setViewName("admin");
         registry.addViewController("/chat").setViewName("tempChat");
         
     }
