@@ -31,13 +31,6 @@ public class UserService {
                 .toList();
     }
 
-    public List<User> getAllAdmins() {
-        return
-                StreamSupport.stream(userRepo.findAll().spliterator(), false)
-                .map(userMapper::toDto)
-                .toList();
-    }
-
     public User createUser(User user) throws UserNameTakenException {
         if (isUsernameTaken(user.getUsername()))
             throw new UserNameTakenException("Please change username, " + user.getUsername() + " is taken");
