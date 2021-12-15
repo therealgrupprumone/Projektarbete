@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import se.iths.projektarbete.dto.Feed;
 import se.iths.projektarbete.service.FeedService;
-import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -17,10 +16,10 @@ public class FeedController {
 
     private final FeedService feedService;
 
-    @GetMapping
-    public ResponseEntity<List<Feed>> getAllFeeds() {
-        return ResponseEntity.ok(feedService.findAll());
-    }
+//    @GetMapping
+//    public ResponseEntity<List<Feed>> getAllFeeds() {
+//        return ResponseEntity.ok(feedService.findAll());
+//    }
 
     @GetMapping("{id}")
     public ResponseEntity<Feed> getFeedById(@PathVariable Long id) {
