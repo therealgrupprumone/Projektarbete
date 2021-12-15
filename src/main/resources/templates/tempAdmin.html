@@ -15,9 +15,10 @@
 </form>
 
 
-<ol th:each="user: ${listOfAdmins}" >
+<ul th:each="user: ${listOfAdmins}" >
     <li th:text="${user.username}"></li>
-</ol>
+    <li th:text="${user.getUserRoles()}"></li>
+</ul>
 
 
 <form method="post" th:action="@{/logout}">
