@@ -44,6 +44,9 @@ public class PopulateDatabase {
             User user = new User("boalbert", "hej");
             userService.createUser(user);
 
+            User userAdmin = new User("jannis", "hej");
+            userService.createAdmin(userAdmin);
+
             Message firstMessage = new Message(1L, "First message", "boalbert", LocalDateTime.now(), 1L);
             Message secondMessage = new Message(2L, "Second message", "boalbert", LocalDateTime.now(), 1L);
             Message thirdMessage = new Message(3L, "Third message", "boalbert", LocalDateTime.now(), 1L);

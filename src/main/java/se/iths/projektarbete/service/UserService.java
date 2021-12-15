@@ -45,6 +45,21 @@ public class UserService {
 
     }
 
+    public User createAdmin(User user) throws UserNameTakenException {
+        if (isUsernameTaken(user.getUsername()))
+            throw new UserNameTakenException("Please change username, " + user.getUsername() + " is taken");
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        Role role = new Role("ROLE_ADMIN");
+        user.addRole(role);
+
+        UserEntity dtoToUserEntity = userMapper.fromDto(user);
+
+        return userMapper.toDto(userRepo.save(dtoToUserEntity));
+
+    }
+
+
     public void deleteUser(Long id) {
         UserEntity foundUser = userRepo.findById(id)
                 .orElseThrow(EntityNotFoundException::new);
