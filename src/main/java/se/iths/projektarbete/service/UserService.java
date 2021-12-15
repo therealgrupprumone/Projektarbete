@@ -45,7 +45,7 @@ public class UserService {
 
         UserEntity dtoToUserEntity = userMapper.fromDto(user);
 
-        sender.sendMessage(new EmailNotification(user.getUsername(), "sample.email@adress.com"));
+        sender.sendMessage(new EmailNotification(user.getUsername(), user.getEmail()));
 
         return userMapper.toDto(userRepo.save(dtoToUserEntity));
 
