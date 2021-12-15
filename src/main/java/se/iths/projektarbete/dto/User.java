@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,5 +34,11 @@ public class User {
     @JsonIgnore
     public Set<Message> getMessages() {
         return messages;
+    }
+
+    public String getUserRoles() {
+        return roles.stream()
+                .map(Role::getRoleName)
+                .collect(Collectors.joining(", "));
     }
 }
