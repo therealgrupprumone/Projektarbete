@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.thymeleaf.spring5.context.webflux.ReactiveDataDriverContextVariable;
 import se.iths.projektarbete.dto.Message;
 import se.iths.projektarbete.repo.UserRepo;
+import se.iths.projektarbete.service.FeedService;
 import se.iths.projektarbete.service.MessageService;
 
 import java.security.Principal;
@@ -20,15 +21,16 @@ import java.security.Principal;
 public class ChatController {
 
     MessageService messageService;
+    FeedService feedService;
     UserRepo userRepo;
 
     @GetMapping(value = "/chat", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     String getChat(Model model) {
         var variable = new ReactiveDataDriverContextVariable(this.messageService.findAll(), 1);
         model.addAttribute("welcome", "General Chat");
-        model.addAttribute("chats", messageService.findAll());
+//        model.addAttribute("chats", messageService.findAll());
         model.addAttribute("updatedChat", variable);
-        return "chat";
+        return "chat :: #message-block";
     }
 
     @RequestMapping(value = "/sendMessage", method = RequestMethod.POST)

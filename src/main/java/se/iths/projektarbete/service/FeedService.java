@@ -22,7 +22,7 @@ public class FeedService {
     private final FeedMapper mapper;
     private FeedRepo feedRepo;
 
-    public Flux<Feed> findAll() {
+    public Flux<List<Feed>> findAll() {
         List<Feed> allFeeds = new ArrayList<>();
         Iterable<FeedEntity> foundFeeds = feedRepo.findAll();
         foundFeeds.forEach(feed -> {
@@ -30,7 +30,7 @@ public class FeedService {
         });
         Flux<Feed> fluxAllFeeds = (Flux<Feed>) allFeeds;
         return Flux
-                .fromStream(Stream.generate(() -> new Feed()));
+                .fromStream(Stream.generate(() -> allFeeds));
     }
 
     public Feed findByFeedId(Long id) {

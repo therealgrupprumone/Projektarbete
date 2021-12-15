@@ -12,8 +12,7 @@
 <body>
 <h1 th:text="${welcome}"/>
 <div id="message-block">
-    <table data-th-each="feed : ${updatedChat}">
-        [[ ${feed.chatMessages} ]]
+    <table>
         <thead>
         <tr>
             <th scope="col">User</th>
@@ -21,9 +20,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="chat: ${chats}">
-            <td th:text="${chat.username}"/>
-            <td th:text="${chat.chatMessage}"/>
+        <tr data-th-each="chat: ${updatedChat}">
+            <td th:text="${chat}"/>
         </tr>
         </tbody>
     </table>
