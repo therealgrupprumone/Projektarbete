@@ -41,4 +41,9 @@ public class User {
                 .map(Role::getRoleName)
                 .collect(Collectors.joining(", "));
     }
+
+    @JsonIgnore
+    public Set<Role> getRoles() {
+        return roles;
+    }
 }

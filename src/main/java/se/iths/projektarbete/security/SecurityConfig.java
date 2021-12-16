@@ -32,9 +32,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .httpBasic()
                 .and()
+
                 .authorizeRequests()
-                .antMatchers("/", "/users").permitAll()
-                .antMatchers("/messages").hasRole("USER")
+                .antMatchers("/**/*.js", "/**/*.css").permitAll()
+                .antMatchers("/", "/home").permitAll()
+                .antMatchers("/messages", "/chat").authenticated()
                 .antMatchers("/admin").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
