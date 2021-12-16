@@ -7,6 +7,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @RequiredArgsConstructor
@@ -29,7 +30,7 @@ public class MessageEntity {
     @NonNull
     private UserEntity user;
 
-    private LocalDateTime createdAt;
+    private String createdAt;
 
     @ManyToOne
     @JoinColumn(name = "feed_id")
@@ -38,7 +39,7 @@ public class MessageEntity {
 
     @PrePersist
     public void getCurrentDate() {
-        setCreatedAt(LocalDateTime.now());
+        setCreatedAt(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
     }
 
     @JsonIgnore

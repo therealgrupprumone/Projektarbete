@@ -15,8 +15,6 @@ import se.iths.projektarbete.repo.RoleRepo;
 import se.iths.projektarbete.service.MessageService;
 import se.iths.projektarbete.service.UserService;
 
-import java.time.LocalDateTime;
-
 @Configuration
 @Slf4j
 @Profile("!test")
@@ -47,13 +45,15 @@ public class PopulateDatabase {
             User userAdmin = new User("jannis", "hej");
             userService.createAdmin(userAdmin);
 
-            Message firstMessage = new Message(1L, "First message", "boalbert", LocalDateTime.now(), 1L);
-            Message secondMessage = new Message(2L, "Second message", "boalbert", LocalDateTime.now(), 1L);
-            Message thirdMessage = new Message(3L, "Third message", "boalbert", LocalDateTime.now(), 1L);
+            Message firstMessage = new Message(1L, "First message", "boalbert", "2021-12-24 13:37", 1L);
+            Message secondMessage = new Message(2L, "Second message", "boalbert", "2021-12-24 13:37", 1L);
+            Message thirdMessage = new Message(3L, "Third message, and this one is a bit longer.", "boalbert", "2021-12-24 13:37", 1L);
+            Message fourthMessage = new Message(4L, "Fourth message, and this one is even longer. Morbi non feugiat nisi. Nullam semper egestas tellus sed lacinia. Suspendisse varius libero non lorem interdum, ut porta ex volutpat.", "jannis", "2021-12-24 13:37", 1L);
 
             messageService.postMessage(firstMessage);
             messageService.postMessage(secondMessage);
             messageService.postMessage(thirdMessage);
+            messageService.postMessage(fourthMessage);
 
             log.info("Running with profile: " + profile);
 

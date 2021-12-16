@@ -55,7 +55,7 @@ class MessageMapperTest {
     void mappingMessageEntityToMessageDtoSavesCreatedAt() {
 
         var messageEntity = new MessageEntity();
-        var createdAt = LocalDateTime.now();
+        var createdAt = "2021-12-24 13:37";
 
         messageEntity.setChatMessage("This must not be null");
         messageEntity.setCreatedAt(createdAt);
