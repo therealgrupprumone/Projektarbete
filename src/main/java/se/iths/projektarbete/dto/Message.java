@@ -1,5 +1,6 @@
 package se.iths.projektarbete.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.io.Serializable;
@@ -18,7 +19,7 @@ public class Message implements Serializable {
     @NonNull
     private String chatMessage;
     private String username;
-    private LocalDateTime createdAt;
+    private String createdAt;
 
     private Long feedId;
 
