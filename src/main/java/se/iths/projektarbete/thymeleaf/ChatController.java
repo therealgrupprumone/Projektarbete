@@ -37,6 +37,7 @@ public class ChatController {
 
     @PostMapping("createAdmin")
     public String createAdmin(@ModelAttribute User user) {
+        System.out.println("********************* KUKU **********************");
         userService.createAdmin(user);
         return "redirect:/admin";
     }
@@ -45,6 +46,13 @@ public class ChatController {
     public String getAllAdmins(Model model) {
         model.addAttribute("listOfAdmins", userService.getAllUsers());
         return "admin";
+    }
+
+    @PostMapping("createUser")
+    public String createUser(@ModelAttribute User user) {
+        System.out.println("********************* KUKU **********************");
+        userService.createUser(user);
+        return "chat";
     }
 
 }

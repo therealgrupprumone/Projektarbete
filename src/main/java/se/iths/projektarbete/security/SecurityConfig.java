@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/*.js", "/**/*.css").permitAll()
 //                .antMatchers("/", "/home").permitAll()
 //                .antMatchers("/messages", "/chat").authenticated()
-                .antMatchers("/", "/home", "/users").permitAll() //TODO "/users" gör även getUserById öppen för alla men behövs för att skapa ny användare utan at vara inloggad
+                .antMatchers("/", "/home", "/users", "/signup").permitAll() //TODO "/users" gör även getUserById öppen för alla men behövs för att skapa ny användare utan at vara inloggad
                 .antMatchers("/messages", "/chat", "/feeds", "/roles").authenticated()
                 .antMatchers("/admin").hasRole("ADMIN")
                 .anyRequest().authenticated()
