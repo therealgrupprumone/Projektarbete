@@ -37,22 +37,22 @@ public class ChatController {
 
     @PostMapping("createAdmin")
     public String createAdmin(@ModelAttribute User user) {
-        System.out.println("********************* ADMIN ********************** " + user);
+        System.out.println("createAdmin called in ChatController with: " + user.toString());
         userService.createAdmin(user);
         return "redirect:/admin";
+    }
+
+    @PostMapping("createUser")
+    public String createUser(@ModelAttribute User user) {
+        System.out.println("createUser in ChatController called with " + user.toString());
+        userService.createUser(user);
+        return "chat";
     }
 
     @GetMapping("/admin")
     public String getAllAdmins(Model model) {
         model.addAttribute("listOfAdmins", userService.getAllUsers());
         return "admin";
-    }
-
-    @PostMapping("createUser")
-    public String createUser(@ModelAttribute User user) {
-        System.out.println("********************* USER ********************** " + user);
-        userService.createUser(user);
-        return "chat";
     }
 
 }
