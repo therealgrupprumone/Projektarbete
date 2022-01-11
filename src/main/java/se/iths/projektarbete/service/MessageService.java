@@ -10,6 +10,8 @@ import se.iths.projektarbete.repo.MessageRepo;
 import se.iths.projektarbete.repo.UserRepo;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -26,6 +28,8 @@ public class MessageService {
         foundMessages.forEach(message -> {
             allMessages.add(mapper.toDto(message));
         });
+        //Reversing list so that the most recent message is on top of the list in /chat
+        Collections.reverse(allMessages);
         return allMessages;
     }
 
