@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns:th="http://www.thymeleaf.org">
+<html
+        xmlns:th="http://www.thymeleaf.org">
 <head>
     <!--    Our style-->
     <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
@@ -10,55 +10,21 @@
     <title>Chat - Sign Up</title>
 </head>
 <body>
-<!--Top navbar-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">Home</a>
-        <div class="collapse navbar-collapse d-flex" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0" sec:authorize="isAuthenticated()">
-                <li class="nav-item me-4">
-                    <span class="btn btn-success disabled" sec:authentication="name"></span>
-                </li>
-                <li class="nav-item">
-                    <form method="post" th:action="@{/logout}">
-                        <input class="btn btn-secondary" type="submit" value="Log out"/>
-                    </form>
-                </li>
-            </ul>
-        </div>
+
+<form action="#" method="post" th:action="@{/createUser}">
+    <div class="mb-3">
+        <label class="form-label" for="exampleFormControlInput1">Username</label>
+        <input class="form-control" id="exampleFormControlInput1" name="username" type="text">
     </div>
-</nav>
-<section class="container">
-    <main>
-        <h1 class="display-1">Sign Up</i>
-        </h1>
-        <hr>
-        <form method="post" th:action="@{/createUser}">
-            <div class="mb-3">
-                <label class="form-label" for="exampleFormControlInput1">Username</label>
-                <input class="form-control" id="exampleFormControlInput1" name="username" type="text">
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="exampleFormControlInput2">Password</label>
-                <input class="form-control" id="exampleFormControlInput2" name="password" type="password">
-            </div>
-            <div class="mb-3">
-                <input class="btn btn-primary" type="submit" value="Sign up">
-            </div>
-        </form>
-        <form action="/">
-            <input class="btn btn-success" type="submit" value="Back"/>
-        </form>
-        <div class="text-muted">
-            <div th:if="${param.error}">
-                - Invalid username and/or password.
-            </div>
-            <div th:if="${param.logout}">
-                - You have been logged out.
-            </div>
-        </div>
-    </main>
-</section>
+    <div class="mb-3">
+        <label class="form-label" for="exampleFormControlInput2">Password</label>
+        <input class="form-control" id="exampleFormControlInput2" name="password" type="text">
+    </div>
+    <div class="mb-3">
+        <button class="btn btn-primary" type="submit">Sign Up</button>
+    </div>
+</form>
+
 <!--Bootstrap JS-->
 <script crossorigin="anonymous"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
