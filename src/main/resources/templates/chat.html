@@ -22,12 +22,12 @@
     }
 
     .time-right {
-        float: right;
         color: #aaa;
     }
 
     .username {
         color: #aaa;
+        font-size: 18px;
     }
 
     .new-message {
@@ -36,10 +36,35 @@
         border-radius: 5px;
         padding: 10px;
         margin: 40px 30px;
+        max-width: 300px;
+    }
+
+    h1 {
+        text-align: center;
+        justify-content: center;
+        align-content: center;
+        margin: 15px;
     }
 
     ul {
         list-style: none;
+    }
+
+    li {
+        margin: 10px;
+    }
+
+    .chat-list {
+        overflow: auto;
+        max-height: 400px;
+        padding: 15px;
+        border-left: 1px solid;
+        border-right: 1px solid;
+        border-radius: 2px;
+    }
+
+    .main-background {
+
     }
 </style>
 <head>
@@ -47,7 +72,6 @@
     <title>Chat</title>
 </head>
 <body>
-<!--Top navbar-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">Home</a>
@@ -65,15 +89,15 @@
         </div>
     </div>
 </nav>
-
+<div class="main-background">
 <h1 th:text="${welcome}"/>
 
-<ul th:each="chat: ${chats}">
-    <li>
+<ul class="chat-list">
+    <li th:each="chat: ${chats}">
         <div class="container">
             <p th:text="${chat.username}" class="username"/>
-            <p class="time-right" th:text="${chat.createdAt}"/>
             <p th:text="${chat.chatMessage}"/>
+            <p class="time-right" th:text="${chat.createdAt}"/>
         </div>
     </li>
 </ul>
@@ -83,6 +107,7 @@
         <input name="chatMessage" type="text"/>
         <input type="submit" value="SEND"/>
     </form>
+</div>
 </div>
 </body>
 </html>
