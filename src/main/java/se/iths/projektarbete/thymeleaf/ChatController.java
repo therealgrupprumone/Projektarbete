@@ -42,11 +42,11 @@ public class ChatController {
         return "redirect:/admin";
     }
 
-    @PostMapping("createUser")
+    @PostMapping(value = "createUser")
     public String createUser(@ModelAttribute User user) {
-        System.out.println("createUser in ChatController called with " + user.toString());
+        System.out.println("createUser called in ChatController with: " + user.toString());
         userService.createUser(user);
-        return "chat";
+        return "login";
     }
 
     @GetMapping("/admin")

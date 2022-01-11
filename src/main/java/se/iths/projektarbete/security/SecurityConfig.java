@@ -29,20 +29,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
+
                 .httpBasic()
                 .and()
                 .authorizeRequests()
                 .antMatchers("/**/*.js", "/**/*.css").permitAll()
 //                .antMatchers("/", "/home").permitAll()
 //                .antMatchers("/messages", "/chat").authenticated()
-                .antMatchers("/", "/home", "/signup", "/users").permitAll() //TODO "/users" gör även getUserById öppen för alla men behövs för att skapa ny användare utan at vara inloggad
+                .antMatchers("/", "/home", "/signup", "/users", "/createUser").permitAll() //TODO "/users" gör även getUserById öppen för alla men behövs för att skapa ny användare utan at vara inloggad
                 .antMatchers("/messages", "/chat", "/feeds", "/roles").authenticated()
                 .antMatchers("/admin").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()
                 .and()
+                .cors().and().csrf().disable()
                 .logout().logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
