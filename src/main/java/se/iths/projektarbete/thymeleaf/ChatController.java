@@ -37,7 +37,7 @@ public class ChatController {
 
     @PostMapping("createAdmin")
     public String createAdmin(@ModelAttribute User user) {
-        System.out.println("********************* KUKU **********************");
+        System.out.println("********************* ADMIN ********************** " + user);
         userService.createAdmin(user);
         return "redirect:/admin";
     }
@@ -50,7 +50,7 @@ public class ChatController {
 
     @PostMapping("createUser")
     public String createUser(@ModelAttribute User user) {
-        System.out.println("********************* KUKU **********************");
+        System.out.println("********************* USER ********************** " + user);
         userService.createUser(user);
         return "chat";
     }
