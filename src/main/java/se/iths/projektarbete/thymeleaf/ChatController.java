@@ -41,6 +41,12 @@ public class ChatController {
         return "redirect:/admin";
     }
 
+    @PostMapping("createUser")
+    public String createUser(@ModelAttribute User user) {
+        userService.createUser(user);
+        return "redirect:/admin";
+    }
+
     @GetMapping("/admin")
     public String getAllAdmins(Model model) {
         model.addAttribute("listOfAdmins", userService.getAllUsers());
