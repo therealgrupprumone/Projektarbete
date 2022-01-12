@@ -36,15 +36,15 @@
         <form method="post" th:action="@{/createUser}">
             <div class="mb-3">
                 <label class="form-label" for="exampleFormControlInput1">Username</label>
-                <input class="form-control" id="exampleFormControlInput1" name="username" type="text">
+                <input required class="form-control" id="exampleFormControlInput1" name="username" type="text">
             </div>
             <div class="mb-3">
                 <label class="form-label" for="exampleFormControlInput2">Password</label>
-                <input class="form-control" id="exampleFormControlInput2" name="password" type="password">
+                <input required class="form-control" id="exampleFormControlInput2" name="password" type="password">
             </div>
             <div class="mb-3">
                 <label class="form-label" for="exampleFormControlInput3">Mail</label>
-                <input class="form-control" id="exampleFormControlInput3" name="email" type="text">
+                <input required class="form-control" id="exampleFormControlInput3" name="email" type="email">
             </div>
             <div class="mb-3">
                 <input class="btn btn-primary" type="submit" value="Sign up">
