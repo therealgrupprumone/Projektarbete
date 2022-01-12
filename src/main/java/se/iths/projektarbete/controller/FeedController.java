@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("feeds")
+@RequestMapping("api/v1/feeds")
 public class FeedController {
 
     private final FeedService feedService;
