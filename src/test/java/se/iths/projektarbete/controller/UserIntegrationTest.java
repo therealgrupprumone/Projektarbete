@@ -74,7 +74,7 @@ class UserIntegrationTest {
 
         //expect
         mockMvc.perform(
-                        MockMvcRequestBuilders.get("/users/2")
+                        MockMvcRequestBuilders.get("/api/v1/users/2")
                                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().json(asJsonString(user)));
@@ -106,7 +106,7 @@ class UserIntegrationTest {
 
         //expect
         mockMvc.perform(
-                        MockMvcRequestBuilders.get("/users")
+                        MockMvcRequestBuilders.get("/api/v1/users")
                                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().json(asJsonString(users)));
