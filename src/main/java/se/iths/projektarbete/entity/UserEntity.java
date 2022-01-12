@@ -1,8 +1,8 @@
 package se.iths.projektarbete.entity;
 
 import lombok.*;
-
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,6 +25,8 @@ public class UserEntity {
     private String username;
     @NonNull
     private String password;
+    @NonNull
+    private String email;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<RoleEntity> roles = new HashSet<>();

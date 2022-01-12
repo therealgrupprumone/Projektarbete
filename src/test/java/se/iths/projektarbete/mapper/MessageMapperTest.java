@@ -17,7 +17,7 @@ class MessageMapperTest {
     
     @Test
     void mappingMessageEntityToMessageDtoSavesUsername() {
-        var userEntity = new UserEntity("username", "password");
+        var userEntity = new UserEntity("username", "password", "email@email.se");
         var messageEntity = new MessageEntity();
 
         messageEntity.setUser(userEntity);
