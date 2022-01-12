@@ -16,3 +16,59 @@
        `-Dspring.profiles.active=dev`
 
     5. Run program with your new profile
+
+
+**Endpoints**
+
+```
+GET
+
+all users:
+api/v1/users
+
+user by ID:
+api/v1/users/{id}
+QueryParameter = id;
+
+all roles:
+api/v1/roles
+
+all feeds:
+api/v1/feeds
+
+feed by ID:
+api/v1/feeds/{id}
+QueryParameter = id;
+
+all messages:
+api/v1/messages
+
+```
+
+```
+POST
+
+/api/v1/users
+ 
+JSON-body:
+  { 
+	"username": "Jannis",
+	"password" : "hej123",
+	"email": "jannis@test.se"
+}
+/api/v1/messages
+ 
+JSON-body:
+  { 
+  "chatMessage": "fmessage message",
+  "feedId": 1
+}
+
+```
+
+```
+DELETE
+api/v1/users/{id}
+QueryParameter = id;
+
+```

@@ -37,14 +37,12 @@ public class ChatController {
 
     @PostMapping("createAdmin")
     public String createAdmin(@ModelAttribute User user) {
-        System.out.println("createAdmin called in ChatController with: " + user.toString());
         userService.createAdmin(user);
         return "redirect:/admin";
     }
 
     @PostMapping(value = "createUser")
     public String createUser(@ModelAttribute User user) {
-        System.out.println("createUser called in ChatController with: " + user.toString());
         userService.createUser(user);
         return "login";
     }

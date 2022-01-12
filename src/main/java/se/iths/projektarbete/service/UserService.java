@@ -32,8 +32,6 @@ public class UserService {
     }
 
     public User createUser(User user) throws UserNameTakenException {
-
-        System.out.println("createUser in UserService called: " + user.toString());
         if (isUsernameTaken(user.getUsername()))
             throw new UserNameTakenException("Please change username, " + user.getUsername() + " is taken");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
