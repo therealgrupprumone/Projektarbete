@@ -39,10 +39,10 @@ public class PopulateDatabase {
             roleRepo.save(roleAdmin);
             roleRepo.save(roleUser);
 
-            User user = new User("boalbert", "hej");
+            User user = new User("boalbert", "hej", "boalbert@test.se");
             userService.createUser(user);
 
-            User userAdmin = new User("jannis", "hej");
+            User userAdmin = new User("jannis", "hej", "jannis@test.se");
             userService.createAdmin(userAdmin);
 
             Message firstMessage = new Message(1L, "First message", "boalbert", "2021-12-24 13:37", 1L);
