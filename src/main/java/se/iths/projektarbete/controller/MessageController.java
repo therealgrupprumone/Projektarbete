@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.iths.projektarbete.dto.Message;
+import se.iths.projektarbete.exception.EmptyMessageException;
 import se.iths.projektarbete.service.MessageService;
 
 import java.security.Principal;
@@ -22,7 +23,7 @@ public class MessageController {
     }
 
     @PostMapping
-    public ResponseEntity<Message> postMessage(@RequestBody Message message, Principal principal) {
+    public ResponseEntity<Message> postMessage(@RequestBody Message message, Principal principal) throws EmptyMessageException {
         message.setUsername(principal.getName());
         return ResponseEntity.ok(messageService.postMessage(message));
     }

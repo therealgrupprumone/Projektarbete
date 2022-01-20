@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import se.iths.projektarbete.dto.Message;
 import se.iths.projektarbete.entity.MessageEntity;
 import se.iths.projektarbete.entity.UserEntity;
+import se.iths.projektarbete.exception.EmptyMessageException;
 import se.iths.projektarbete.mapper.MessageMapper;
 import se.iths.projektarbete.repo.MessageRepo;
 import se.iths.projektarbete.repo.UserRepo;
@@ -33,7 +34,10 @@ public class MessageService {
         return allMessages;
     }
 
-    public Message postMessage(Message message) {
+    public Message postMessage(Message message) throws EmptyMessageException {
+        if (message.getChatMessage().equals("")) {
+            throw new EmptyMessageException("Message can not be empty");
+        }
         UserEntity byUsername = userRepo.findByUsername(message.getUsername());
 
         MessageEntity messageEntity = mapper.fromDto(message);
