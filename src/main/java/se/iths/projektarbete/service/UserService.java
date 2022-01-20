@@ -49,9 +49,12 @@ public class UserService {
 
     }
 
-    public User createAdmin(User user) throws UserNameTakenException {
+    public User createAdmin(User user) throws RuntimeException {
         if (isUsernameTaken(user.getUsername()))
             throw new UserNameTakenException("Please change username, " + user.getUsername() + " is taken");
+        if (user.getPassword().length() < 6)
+            throw new ToShortPasswordException("Password must at least be 6 characters.");
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         Role role = new Role("ROLE_ADMIN");
