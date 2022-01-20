@@ -1,7 +1,7 @@
 ![CI Status](https://github.com//therealgrupprumone/Projektarbete/actions/workflows/maven.yml/badge.svg)
 
 - Set up docker:
-  `docker run --name mariadb_komplex -e MYSQL_ROOT_PASSWORD=mypass -p 3306:3306 -d docker.io/library/mariadb:10.5`
+  `docker run --name mariadb_komplex -e MYSQL_ROOT_PASSWORD=mypass -e MYSQL_DATABASE=chat -p 3306:3306 -d docker.io/library/mariadb:10.5;`
 
 - Set up profile in IntelliJ for running with the dev-version of application.properties.
 
