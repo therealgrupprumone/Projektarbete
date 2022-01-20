@@ -35,9 +35,9 @@ public class MessageService {
     }
 
     public Message postMessage(Message message) throws EmptyMessageException {
-        if (message.getChatMessage().equals("")) {
+        if (message.getChatMessage().equals(""))
             throw new EmptyMessageException("Message can not be empty");
-        }
+
         UserEntity byUsername = userRepo.findByUsername(message.getUsername());
 
         MessageEntity messageEntity = mapper.fromDto(message);

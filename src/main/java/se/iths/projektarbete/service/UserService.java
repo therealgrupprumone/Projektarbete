@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import se.iths.projektarbete.dto.Role;
 import se.iths.projektarbete.dto.User;
 import se.iths.projektarbete.entity.UserEntity;
+import se.iths.projektarbete.exception.ToShortPasswordException;
 import se.iths.projektarbete.exception.UserNameTakenException;
 import se.iths.projektarbete.mapper.UserMapper;
 import se.iths.projektarbete.repo.UserRepo;
@@ -31,9 +32,12 @@ public class UserService {
                 .toList();
     }
 
-    public User createUser(User user) throws UserNameTakenException {
+    public User createUser(User user) throws RuntimeException {
         if (isUsernameTaken(user.getUsername()))
             throw new UserNameTakenException("Please change username, " + user.getUsername() + " is taken");
+        if (user.getPassword().length() < 6)
+            throw new ToShortPasswordException("Password must at least be 6 characters.");
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         Role role = new Role("ROLE_USER");
