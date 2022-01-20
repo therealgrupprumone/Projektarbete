@@ -61,7 +61,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(EmptyMessageException.class)
-    protected ResponseEntity<Object> handleUsernameTaken(EmptyMessageException ex) {
+    protected ResponseEntity<Object> handleEmptyMessage(EmptyMessageException ex) {
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST);
+        apiError.setMessage(ex.getMessage());
+        return buildResponseEntity(apiError);
+    }
+
+    @ExceptionHandler(ToShortPasswordException.class)
+    protected ResponseEntity<Object> handleToShortPassword(ToShortPasswordException ex) {
         ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST);
         apiError.setMessage(ex.getMessage());
         return buildResponseEntity(apiError);

@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) throws UserNameTakenException {
+    public ResponseEntity<User> createUser(@RequestBody User user) throws RuntimeException {
         return ResponseEntity.ok(userService.createUser(user));
     }
 
